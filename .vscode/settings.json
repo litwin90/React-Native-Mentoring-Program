@@ -1,0 +1,21 @@
+{
+    "editor.insertSpaces": true,
+    "files.eol": "\n",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "editor.formatOnSave": false,
+    "prettier.prettierPath": "./node_modules/prettier",
+    "prettier.configPath": "./.prettierrc.js",
+    "[javascript]": {
+        "editor.formatOnSave": true
+    },
+    "[json]": {
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.formatOnSave": true,
+        "editor.suggest.insertMode": "replace"
+    },
+    "html.format.enable": false,
+    "editor.formatOnPaste": false,
+}
