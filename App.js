@@ -16,6 +16,10 @@ import {
     DebugInstructions,
     ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {Provider} from 'react-redux';
+
+import Counter from './components/counter/counter.component';
+import {appStore} from './app/store';
 
 if (__DEV__) {
     import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
@@ -23,7 +27,7 @@ if (__DEV__) {
 
 const App = () => {
     return (
-        <>
+        <Provider store={appStore}>
             <StatusBar barStyle="dark-content" />
             <SafeAreaView>
                 <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
@@ -34,9 +38,9 @@ const App = () => {
                         </View>
                     )}
                     <View style={styles.body}>
+                        <Counter />
                         <View style={styles.sectionContainer}>
                             <Text style={styles.sectionTitle}>Step One</Text>
-                            <Text> Some text</Text>
 
                             <Text style={styles.sectionDescription}>
                                 Edit <Text style={styles.highlight}>App.js</Text> to change this screen and then come
@@ -63,7 +67,7 @@ const App = () => {
                     </View>
                 </ScrollView>
             </SafeAreaView>
-        </>
+        </Provider>
     );
 };
 

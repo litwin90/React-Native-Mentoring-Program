@@ -1,5 +1,5 @@
 {
-    "name": "RNMP",
+    "name": "react-native-mentoring-program",
     "version": "0.0.1",
     "private": true,
     "scripts": {
@@ -10,8 +10,11 @@
         "lint": "eslint ."
     },
     "dependencies": {
+        "@reduxjs/toolkit": "^1.2.5",
         "react": "16.9.0",
-        "react-native": "0.61.5"
+        "react-native": "0.61.5",
+        "react-redux": "^7.2.0",
+        "redux": "^4.0.5"
     },
     "devDependencies": {
         "@babel/core": "7.9.0",
