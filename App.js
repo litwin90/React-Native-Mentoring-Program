@@ -9,14 +9,14 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
 
-import {Login} from './components';
+import {SignUp} from './components';
 import {appStore} from './app/store';
 
 class App extends Component {
     render() {
         return (
             <Provider store={appStore}>
-                <Login />
+                <SignUp />
             </Provider>
         );
     }

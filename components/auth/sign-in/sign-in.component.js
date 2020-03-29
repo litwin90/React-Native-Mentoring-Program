@@ -3,16 +3,18 @@ import {Text, TextInput, TouchableHighlight, KeyboardAvoidingView} from 'react-n
 import LinearGradient from 'react-native-linear-gradient';
 import ValidationComponent from 'react-native-form-validator';
 
-import LoginStyles, {BackgroundGradientColors} from './login.styles';
+import SignInStyles, {BackgroundGradientColors} from './sign-in.styles';
 import {BaseStyles} from '../../../app.styles';
 import {FormWarning} from '../form-warning';
 
-export class Login extends ValidationComponent {
+export class SignIn extends ValidationComponent {
     constructor(props) {
         super(props);
         this.state = {email: '', password: ''};
         this.emailError = '';
         this.passwordError = '';
+        this.defaultEmailPlaceholder = 'Email Address';
+        this.defaultPasswordPlaceholder = 'Password';
     }
 
     checkEmailField() {
@@ -74,13 +76,13 @@ export class Login extends ValidationComponent {
 
     render() {
         return (
-            <LinearGradient colors={BackgroundGradientColors} style={LoginStyles.container}>
-                <KeyboardAvoidingView behavior="position" style={LoginStyles.container}>
-                    <Text style={LoginStyles.title}>Ecommerce Store</Text>
+            <LinearGradient colors={BackgroundGradientColors} style={SignInStyles.container}>
+                <KeyboardAvoidingView behavior="position" style={SignInStyles.container}>
+                    <Text style={SignInStyles.title}>Ecommerce Store</Text>
                     <TextInput
                         value={this.state.email}
                         onChangeText={text => this.onChangeEmail(text)}
-                        style={LoginStyles.input}
+                        style={SignInStyles.input}
                         placeholder={this.defaultEmailPlaceholder}
                         placeholderTextColor={BaseStyles.colors.black}
                         autoCompleteType="email"
@@ -93,7 +95,7 @@ export class Login extends ValidationComponent {
                     <TextInput
                         value={this.state.password}
                         onChangeText={text => this.onChangePassword(text)}
-                        style={LoginStyles.input}
+                        style={SignInStyles.input}
                         placeholder={this.defaultPasswordPlaceholder}
                         placeholderTextColor={BaseStyles.colors.black}
                         autoCompleteType="password"
@@ -105,23 +107,23 @@ export class Login extends ValidationComponent {
                     <TouchableHighlight
                         underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
                         hitSlop={BaseStyles.buttonHitSlop}
-                        style={LoginStyles.restorePassword}
+                        style={SignInStyles.restorePassword}
                         onPress={() => this.onRestorePassword()}>
-                        <Text style={LoginStyles.link}>Forgot Password?</Text>
+                        <Text style={SignInStyles.link}>Forgot Password?</Text>
                     </TouchableHighlight>
                     <TouchableHighlight
-                        style={LoginStyles.signInButton}
+                        style={SignInStyles.signInButton}
                         underlayColor={BaseStyles.colors.lightBlue}
                         hitSlop={BaseStyles.buttonHitSlop}
                         onPress={() => this.onSignIn()}>
-                        <Text style={LoginStyles.signInText}>Sign in</Text>
+                        <Text style={SignInStyles.signInText}>Sign in</Text>
                     </TouchableHighlight>
                     <TouchableHighlight
                         underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
                         hitSlop={BaseStyles.buttonHitSlop}
-                        style={LoginStyles.signUp}
+                        style={SignInStyles.signUp}
                         onPress={() => this.onSignUp()}>
-                        <Text style={LoginStyles.link}>New Here? Sign Up?</Text>
+                        <Text style={SignInStyles.link}>New Here? Sign Up?</Text>
                     </TouchableHighlight>
                 </KeyboardAvoidingView>
             </LinearGradient>
