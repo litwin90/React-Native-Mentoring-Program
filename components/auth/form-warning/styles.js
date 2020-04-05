@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import {BaseStylesSets, BaseStyles} from '../../../app.styles';
+import { BaseStylesSets, BaseStyles } from '../../../app.styles';
 
 export const WarningStyles = StyleSheet.create({
     errorContainer: {

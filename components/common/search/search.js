@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {TextInput, View} from 'react-native';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faSearch} from '@fortawesome/free-solid-svg-icons';
+import React, { Component } from 'react';
+import { TextInput, View } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-import {SearchStyles} from './styles';
-import {BaseStyles} from '../../../app.styles';
+import { SearchStyles } from './styles';
+import { BaseStyles } from '../../../app.styles';
 
 export class Search extends Component {
     constructor() {

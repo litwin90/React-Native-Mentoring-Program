@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
-import {View, Text, TouchableHighlight, ScrollView} from 'react-native';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faBars, faShoppingCart} from '@fortawesome/free-solid-svg-icons';
+import React, { Component } from 'react';
+import { View, Text, TouchableHighlight, ScrollView } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faBars, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 import Styles from './styles';
-import {BaseStyles} from '../../app.styles';
-import {Search} from '../common/search/search';
-import {Group} from './group/group';
-import {ProductList} from './product-list/product-list';
+import { BaseStyles } from '../../app.styles';
+import { Search } from '../common/search/search';
+import { Group } from './group/group';
+import { ProductList } from './product-list/product-list';
 
 export class Main extends Component {
     constructor() {
@@ -44,11 +44,11 @@ export class Main extends Component {
                     },
                 ],
             },
-            {id: 'efvedvevewvr', name: 'Cloth', source: require('../../img/cloth.jpg')},
-            {id: 'sdfdscdscvdsfvsdfvsdf', name: 'Furniture', source: require('../../img/furniture.jpg')},
-            {id: 'easdcsdcfvedvevewvr', name: 'Electronics', source: require('../../img/electronics1.jpg')},
-            {id: 'efvedveveasdcsadcwvr', name: 'Cloth', source: require('../../img/cloth.jpg')},
-            {id: 'efveevervdvevewvr', name: 'Furniture', source: require('../../img/furniture.jpg')},
+            { id: 'efvedvevewvr', name: 'Cloth', source: require('../../img/cloth.jpg') },
+            { id: 'sdfdscdscvdsfvsdfvsdf', name: 'Furniture', source: require('../../img/furniture.jpg') },
+            { id: 'easdcsdcfvedvevewvr', name: 'Electronics', source: require('../../img/electronics1.jpg') },
+            { id: 'efvedveveasdcsadcwvr', name: 'Cloth', source: require('../../img/cloth.jpg') },
+            { id: 'efveevervdvevewvr', name: 'Furniture', source: require('../../img/furniture.jpg') },
         ];
         this.currentGroup = this.groups[0];
     }

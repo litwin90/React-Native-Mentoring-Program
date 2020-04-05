@@ -5,8 +5,8 @@ export const BaseStyles = {
         m: 20,
         l: 30,
     },
-    padding: {m: 8, s: 4, l: 12},
-    fontSize: {xl: 32, l: 24, m: 18, s: 16, xs: 12},
+    padding: { m: 8, s: 4, l: 12 },
+    fontSize: { xl: 32, l: 24, m: 18, s: 16, xs: 12 },
     colors: {
         white: '#ffffff',
         black: '#000000',

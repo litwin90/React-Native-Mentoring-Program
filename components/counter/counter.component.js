@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Button, View, Text} from 'react-native';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { Button, View, Text } from 'react-native';
+import { connect } from 'react-redux';
 
 import CounterActions from './counter.actions';
 import CounterStyles from './counter.styles';
@@ -22,7 +22,7 @@ class Counter extends Component {
 }
 
 const mapStateToProps = state => {
-    const {counter} = state;
+    const { counter } = state;
     return counter;
 };
 

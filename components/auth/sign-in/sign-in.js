@@ -1,16 +1,16 @@
 import React from 'react';
-import {Text, TextInput, TouchableHighlight, KeyboardAvoidingView} from 'react-native';
+import { Text, TextInput, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import ValidationComponent from 'react-native-form-validator';
 
-import SignInStyles, {BackgroundGradientColors} from './styles';
-import {BaseStyles} from '../../../app.styles';
-import {FormWarning} from '../form-warning';
+import SignInStyles, { BackgroundGradientColors } from './styles';
+import { BaseStyles } from '../../../app.styles';
+import { FormWarning } from '../form-warning';
 
 export class SignIn extends ValidationComponent {
     constructor(props) {
         super(props);
-        this.state = {email: '', password: ''};
+        this.state = { email: '', password: '' };
         this.emailError = '';
         this.passwordError = '';
         this.defaultEmailPlaceholder = 'Email Address';
@@ -38,11 +38,11 @@ export class SignIn extends ValidationComponent {
     }
 
     onChangeEmail(email) {
-        this.setState({email});
+        this.setState({ email });
     }
 
     onChangePassword(password) {
-        this.setState({password});
+        this.setState({ password });
     }
 
     onRestorePassword() {}
@@ -61,15 +61,15 @@ export class SignIn extends ValidationComponent {
             '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})',
         );
         this.validate({
-            email: {required: true, email: true},
-            password: {required: true, any: passwordValidator},
+            email: { required: true, email: true },
+            password: { required: true, any: passwordValidator },
         });
     }
 
     clearForm() {
         this.emailError = '';
         this.passwordError = '';
-        this.setState({email: '', password: ''});
+        this.setState({ email: '', password: '' });
     }
 
     onSignUp() {}

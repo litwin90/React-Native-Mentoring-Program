@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import {BaseStyles, BaseStylesSets} from '../../../app.styles';
+import { BaseStyles, BaseStylesSets } from '../../../app.styles';
 
 const styles = StyleSheet.create({
     container: {

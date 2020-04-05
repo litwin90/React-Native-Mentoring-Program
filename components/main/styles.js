@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {BaseStylesSets, BaseStyles} from '../../app.styles';
+import { StyleSheet } from 'react-native';
+import { BaseStylesSets, BaseStyles } from '../../app.styles';
 
 const MainStyles = StyleSheet.create({
     wrapper: {

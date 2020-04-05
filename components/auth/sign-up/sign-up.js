@@ -1,18 +1,18 @@
 import React from 'react';
-import {Text, TextInput, TouchableHighlight, KeyboardAvoidingView} from 'react-native';
+import { Text, TextInput, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import ValidationComponent from 'react-native-form-validator';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-import SignUpStyles, {BackgroundGradientColors} from './styles';
-import {BaseStyles} from '../../../app.styles';
-import {FormWarning} from '../form-warning';
+import SignUpStyles, { BackgroundGradientColors } from './styles';
+import { BaseStyles } from '../../../app.styles';
+import { FormWarning } from '../form-warning';
 
 export class SignUp extends ValidationComponent {
     constructor(props) {
         super(props);
-        this.state = {fullName: '', email: '', password: '', passwordConfirm: ''};
+        this.state = { fullName: '', email: '', password: '', passwordConfirm: '' };
         this.nameError = '';
         this.emailError = '';
         this.passwordError = '';
@@ -62,7 +62,7 @@ export class SignUp extends ValidationComponent {
     }
 
     onChangePassword(password) {
-        this.setState({password});
+        this.setState({ password });
     }
 
     onSignUp() {
@@ -82,16 +82,16 @@ export class SignUp extends ValidationComponent {
             '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})',
         );
         this.validate({
-            name: {required: true, minlength: 3, maxlength: 12},
-            email: {required: true, email: true},
-            password: {required: true, any: passwordValidator},
+            name: { required: true, minlength: 3, maxlength: 12 },
+            email: { required: true, email: true },
+            password: { required: true, any: passwordValidator },
         });
     }
 
     clearForm() {
         this.emailError = '';
         this.passwordError = '';
-        this.setState({email: '', password: ''});
+        this.setState({ email: '', password: '' });
     }
 
     goToSignIn() {}
@@ -114,7 +114,7 @@ export class SignUp extends ValidationComponent {
                     <Text style={SignUpStyles.title}>Ecommerce Store</Text>
                     <TextInput
                         value={this.state.fullName}
-                        onChangeText={fullName => this.setState({fullName})}
+                        onChangeText={fullName => this.setState({ fullName })}
                         style={SignUpStyles.input}
                         placeholder={this.defaultNamePlaceholder}
                         placeholderTextColor={BaseStyles.colors.black}
@@ -126,7 +126,7 @@ export class SignUp extends ValidationComponent {
                     {this.nameError ? <FormWarning error={this.nameError} /> : null}
                     <TextInput
                         value={this.state.email}
-                        onChangeText={email => this.setState({email})}
+                        onChangeText={email => this.setState({ email })}
                         style={SignUpStyles.input}
                         placeholder={this.defaultEmailPlaceholder}
                         placeholderTextColor={BaseStyles.colors.black}
@@ -139,7 +139,7 @@ export class SignUp extends ValidationComponent {
                     {this.emailError ? <FormWarning error={this.emailError} /> : null}
                     <TextInput
                         value={this.state.password}
-                        onChangeText={password => this.setState({password})}
+                        onChangeText={password => this.setState({ password })}
                         style={SignUpStyles.input}
                         placeholder={this.defaultPasswordPlaceholder}
                         placeholderTextColor={BaseStyles.colors.black}
@@ -151,7 +151,7 @@ export class SignUp extends ValidationComponent {
                     {this.passwordError ? <FormWarning error={this.passwordError} /> : null}
                     <TextInput
                         value={this.state.passwordConfirm}
-                        onChangeText={passwordConfirm => this.setState({passwordConfirm})}
+                        onChangeText={passwordConfirm => this.setState({ passwordConfirm })}
                         style={SignUpStyles.input}
                         placeholder={this.defaultPasswordConfirmPlaceholder}
                         placeholderTextColor={BaseStyles.colors.black}
