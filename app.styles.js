@@ -1,12 +1,20 @@
 export const BaseStyles = {
-    margin: 30,
-    padding: 8,
-    fontSize: {big: 32, regular: 18, small: 16},
+    margin: {
+        xs: 5,
+        s: 10,
+        m: 20,
+        l: 30,
+    },
+    padding: {m: 8, s: 4, l: 12},
+    fontSize: {xl: 32, l: 24, m: 18, s: 16, xs: 12},
     colors: {
         white: '#ffffff',
         black: '#000000',
         red: 'red',
         lightBlue: '#00a8f3',
+        lightGrey: '#ebebeb',
+        grey: 'grey',
+        blue: '#148cbf',
         Link: '#436bff',
         LinkHighlighUnderlay: '#d3d3d3',
         Button: '#148cbf',
@@ -21,14 +29,22 @@ export const BaseStyles = {
 
 export const BaseStylesSets = {
     containerRightLeftMargins: {
-        marginRight: BaseStyles.margin,
-        marginLeft: BaseStyles.margin,
+        marginRight: BaseStyles.margin.l,
+        marginLeft: BaseStyles.margin.l,
     },
     containerMargins: {
-        margin: BaseStyles.margin,
+        margin: BaseStyles.margin.l,
     },
     baseLink: {
         color: BaseStyles.colors.Link,
-        fontSize: BaseStyles.fontSize.small,
+        fontSize: BaseStyles.fontSize.s,
+    },
+    header: {
+        minHeight: 30,
+        padding: BaseStyles.padding.l,
+        backgroundColor: BaseStyles.colors.lightBlue,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
 };

@@ -107,7 +107,7 @@ export class SignUp extends ValidationComponent {
                         onPress={() => this.goToSignIn()}>
                         <FontAwesomeIcon
                             icon={faArrowLeft}
-                            size={BaseStyles.fontSize.regular}
+                            size={BaseStyles.fontSize.m}
                             color={BaseStyles.colors.black}
                         />
                     </TouchableHighlight>

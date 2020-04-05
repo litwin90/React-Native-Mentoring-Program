@@ -11,6 +11,6 @@ export const WarningStyles = StyleSheet.create({
     },
     error: {
         color: BaseStyles.colors.red,
-        fontSize: BaseStyles.fontSize.small,
+        fontSize: BaseStyles.fontSize.s,
     },
 });

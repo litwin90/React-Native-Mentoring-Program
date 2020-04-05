@@ -8,9 +8,9 @@ const styles = StyleSheet.create({
     },
     title: {
         backgroundColor: 'transparent',
-        fontSize: BaseStyles.fontSize.big,
+        fontSize: BaseStyles.fontSize.xl,
         textAlign: 'center',
-        margin: BaseStyles.margin,
+        margin: BaseStyles.margin.l,
         color: BaseStyles.colors.lightBlue,
         marginTop: 120,
     },
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderBottomWidth: 1,
         color: BaseStyles.colors.black,
-        fontSize: BaseStyles.fontSize.regular,
+        fontSize: BaseStyles.fontSize.m,
         marginTop: 20,
     },
     restorePassword: {
@@ -41,21 +41,21 @@ const styles = StyleSheet.create({
     },
     signInButton: {
         alignSelf: 'stretch',
-        backgroundColor: BaseStyles.colors.Button,
-        padding: BaseStyles.padding,
-        margin: BaseStyles.margin,
+        backgroundColor: BaseStyles.colors.blue,
+        padding: BaseStyles.padding.m,
+        margin: BaseStyles.margin.l,
     },
     signInText: {
         textAlign: 'center',
         color: BaseStyles.colors.white,
         textTransform: 'uppercase',
-        fontSize: BaseStyles.fontSize.regular,
+        fontSize: BaseStyles.fontSize.m,
     },
     backIcon: {
-        width: 30,
-        height: 30,
-        marginLeft: BaseStyles.margin,
-        marginTop: BaseStyles.margin,
+        width: BaseStyles.fontSize.xl,
+        height: BaseStyles.fontSize.xl,
+        marginLeft: BaseStyles.margin.l,
+        marginTop: BaseStyles.margin.l,
     },
 });
 
