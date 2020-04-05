@@ -9,7 +9,7 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
 
-import {Main} from './components/main/main.component';
+import {Main} from './components/main/main';
 import {appStore} from './app/store';
 
 class App extends Component {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {TouchableHighlight, View, Text, Image} from 'react-native';
 
-import {GroupStyles} from './group.styles';
+import {GroupStyles} from './styles';
 import {BaseStyles} from '../../../app.styles';
 
 export class Group extends Component {

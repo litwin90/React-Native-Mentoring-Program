@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Image, Text} from 'react-native';
 
-import Styles from './product.styles';
+import Styles from './styles';
 
 export class Product extends Component {
     getPriceString(item) {

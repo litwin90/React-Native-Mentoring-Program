@@ -5,7 +5,7 @@ import ValidationComponent from 'react-native-form-validator';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 
-import SignUpStyles, {BackgroundGradientColors} from './sign-up.styles';
+import SignUpStyles, {BackgroundGradientColors} from './styles';
 import {BaseStyles} from '../../../app.styles';
 import {FormWarning} from '../form-warning';
 

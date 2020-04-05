@@ -3,7 +3,7 @@ import {Text, TextInput, TouchableHighlight, KeyboardAvoidingView} from 'react-n
 import LinearGradient from 'react-native-linear-gradient';
 import ValidationComponent from 'react-native-form-validator';
 
-import SignInStyles, {BackgroundGradientColors} from './sign-in.styles';
+import SignInStyles, {BackgroundGradientColors} from './styles';
 import {BaseStyles} from '../../../app.styles';
 import {FormWarning} from '../form-warning';
 

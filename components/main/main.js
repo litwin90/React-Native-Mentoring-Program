@@ -3,11 +3,11 @@ import {View, Text, TouchableHighlight, ScrollView} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faBars, faShoppingCart} from '@fortawesome/free-solid-svg-icons';
 
-import Styles from './main.styles';
+import Styles from './styles';
 import {BaseStyles} from '../../app.styles';
-import {Search} from '../search/search.component';
-import {Group} from './group/group.component';
-import {ProductList} from './product-list/product-list.component';
+import {Search} from '../common/search/search';
+import {Group} from './group/group';
+import {ProductList} from './product-list/product-list';
 
 export class Main extends Component {
     constructor() {
