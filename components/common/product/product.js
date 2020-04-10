@@ -3,12 +3,12 @@ import { View, Image, Text, TouchableOpacity } from 'react-native';
 
 import styles, { ExtendedStyles } from './styles';
 
-export default class Product extends Component {
+class Product extends Component {
     constructor(props) {
         super(props);
 
         this.styles = this.props.isExtended ? ExtendedStyles : styles;
-        this.currentImage = this.props.item.images[1];
+        this.currentImage = this.props.item.images[0];
     }
 
     getPriceString(item) {
@@ -28,8 +28,6 @@ export default class Product extends Component {
     }
 
     showImage(image) {
-        console.log(this.currentImage.id);
-
         return (this.currentImage = image);
     }
 
@@ -85,3 +83,5 @@ export default class Product extends Component {
         );
     }
 }
+
+export default Product;

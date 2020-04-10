@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { BaseStyles } from '../../../app.styles';
 
-export const GroupStyles = StyleSheet.create({
+const styles = StyleSheet.create({
     groupImage: {
         width: 45,
         height: 45,
@@ -29,3 +29,5 @@ export const GroupStyles = StyleSheet.create({
         textAlign: 'center',
     },
 });
+
+export default styles;

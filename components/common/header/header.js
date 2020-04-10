@@ -21,8 +21,6 @@ class Header extends Component {
     openWishList() {}
 
     toggleSearch() {
-        console.log('toggle search');
-
         this.props.toggleSearch();
     }
 

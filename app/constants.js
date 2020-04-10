@@ -43,17 +43,17 @@ export const PRODUCTS = [
             },
         ],
     },
-    { id: 'efvedvevewvr', name: 'Cloth', images: [{ id: 'vfvfv', source: require('../img/cloth.jpg') }] },
+    { id: 'efvedvevewvr', name: 'Cloth', source: require('../img/cloth.jpg') },
     {
         id: 'sdfdscdscvdsfvsdfvsdf',
         name: 'Furniture',
-        images: [{ id: 'vfvf', source: require('../img/furniture.jpg') }],
+        source: require('../img/furniture.jpg'),
     },
     {
         id: 'easdcsdcfvedvevewvr',
         name: 'Electronics',
-        images: [{ id: 'sdcr', source: require('../img/electronics1.jpg') }],
+        source: require('../img/electronics1.jpg'),
     },
-    { id: 'efvedveveasdcsadcwvr', name: 'Cloth', images: [{ id: 'jmymv', source: require('../img/cloth.jpg') }] },
-    { id: 'efveevervdvevewvr', name: 'Furniture', images: [{ id: 'yndx', source: require('../img/furniture.jpg') }] },
+    { id: 'efvedveveasdcsadcwvr', name: 'Cloth', source: require('../img/cloth.jpg') },
+    { id: 'efveevervdvevewvr', name: 'Furniture', source: require('../img/furniture.jpg') },
 ];

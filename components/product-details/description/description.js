@@ -17,7 +17,6 @@ const ProductDescription = ({ description, wishList, addToCart }) => (
                     activeOpacity={0.5}
                     onPress={() => {
                         wishList();
-                        console.log(description);
                     }}>
                     <View style={styles.wishList}>
                         <FontAwesomeIcon

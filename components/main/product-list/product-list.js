@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
 
-import Styles from './styles';
+import styles from './styles';
 import { BaseStyles } from '../../../app.styles';
-import Product from '../../common/product';
+import Product from '../../common/product/product';
 
-export class ProductList extends Component {
+class ProductList extends Component {
     viewAllGroupItems() {}
 
     getGroupHeaderJSX() {
         return (
-            <View style={Styles.itemsHeader}>
-                <Text style={Styles.itemsHeaderTitle}>{this.props.currentGroup.name}</Text>
+            <View style={styles.itemsHeader}>
+                <Text style={styles.itemsHeaderTitle}>{this.props.currentGroup.name}</Text>
                 <TouchableHighlight
-                    style={Styles.viewAllButton}
+                    style={styles.viewAllButton}
                     hitSlop={BaseStyles.buttonHitSlop}
                     underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
                     onPress={() => this.viewAllGroupItems()}>
-                    <Text style={Styles.viewAllText}>View all</Text>
+                    <Text style={styles.viewAllText}>View all</Text>
                 </TouchableHighlight>
             </View>
         );
@@ -29,10 +29,12 @@ export class ProductList extends Component {
 
     render() {
         return (
-            <View style={Styles.wrapper}>
+            <View style={styles.wrapper}>
                 <View>{this.getGroupHeaderJSX()}</View>
-                <View style={Styles.productsWrapper}>{this.getProducts()}</View>
+                <View style={styles.productsWrapper}>{this.getProducts()}</View>
             </View>
         );
     }
 }
+
+export default ProductList;

@@ -3,11 +3,11 @@ import { Text, TextInput, TouchableHighlight, KeyboardAvoidingView } from 'react
 import LinearGradient from 'react-native-linear-gradient';
 import ValidationComponent from 'react-native-form-validator';
 
-import SignInStyles, { BackgroundGradientColors } from './styles';
+import styles, { BackgroundGradientColors } from './styles';
 import { BaseStyles } from '../../../app.styles';
-import { FormWarning } from '../form-warning';
+import FormWarning from '../form-warning/form-warning';
 
-export class SignIn extends ValidationComponent {
+class SignIn extends ValidationComponent {
     constructor(props) {
         super(props);
         this.state = { email: '', password: '' };
@@ -76,13 +76,13 @@ export class SignIn extends ValidationComponent {
 
     render() {
         return (
-            <LinearGradient colors={BackgroundGradientColors} style={SignInStyles.container}>
-                <KeyboardAvoidingView behavior="position" style={SignInStyles.container}>
-                    <Text style={SignInStyles.title}>Ecommerce Store</Text>
+            <LinearGradient colors={BackgroundGradientColors} style={styles.container}>
+                <KeyboardAvoidingView behavior="position" style={styles.container}>
+                    <Text style={styles.title}>Ecommerce Store</Text>
                     <TextInput
                         value={this.state.email}
                         onChangeText={text => this.onChangeEmail(text)}
-                        style={SignInStyles.input}
+                        style={styles.input}
                         placeholder={this.defaultEmailPlaceholder}
                         placeholderTextColor={BaseStyles.colors.black}
                         autoCompleteType="email"
@@ -95,7 +95,7 @@ export class SignIn extends ValidationComponent {
                     <TextInput
                         value={this.state.password}
                         onChangeText={text => this.onChangePassword(text)}
-                        style={SignInStyles.input}
+                        style={styles.input}
                         placeholder={this.defaultPasswordPlaceholder}
                         placeholderTextColor={BaseStyles.colors.black}
                         autoCompleteType="password"
@@ -107,26 +107,28 @@ export class SignIn extends ValidationComponent {
                     <TouchableHighlight
                         underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
                         hitSlop={BaseStyles.buttonHitSlop}
-                        style={SignInStyles.restorePassword}
+                        style={styles.restorePassword}
                         onPress={() => this.onRestorePassword()}>
-                        <Text style={SignInStyles.link}>Forgot Password?</Text>
+                        <Text style={styles.link}>Forgot Password?</Text>
                     </TouchableHighlight>
                     <TouchableHighlight
-                        style={SignInStyles.signInButton}
+                        style={styles.signInButton}
                         underlayColor={BaseStyles.colors.lightBlue}
                         hitSlop={BaseStyles.buttonHitSlop}
                         onPress={() => this.onSignIn()}>
-                        <Text style={SignInStyles.signInText}>Sign in</Text>
+                        <Text style={styles.signInText}>Sign in</Text>
                     </TouchableHighlight>
                     <TouchableHighlight
                         underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
                         hitSlop={BaseStyles.buttonHitSlop}
-                        style={SignInStyles.signUp}
+                        style={styles.signUp}
                         onPress={() => this.onSignUp()}>
-                        <Text style={SignInStyles.link}>New Here? Sign Up?</Text>
+                        <Text style={styles.link}>New Here? Sign Up?</Text>
                     </TouchableHighlight>
                 </KeyboardAvoidingView>
             </LinearGradient>
         );
     }
 }
+
+export default SignIn;

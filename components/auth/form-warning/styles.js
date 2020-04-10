@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { BaseStylesSets, BaseStyles } from '../../../app.styles';
 
-export const WarningStyles = StyleSheet.create({
+const styles = StyleSheet.create({
     errorContainer: {
         ...BaseStylesSets.containerRightLeftMargins,
         marginTop: 10,
@@ -14,3 +14,5 @@ export const WarningStyles = StyleSheet.create({
         fontSize: BaseStyles.fontSize.s,
     },
 });
+
+export default styles;

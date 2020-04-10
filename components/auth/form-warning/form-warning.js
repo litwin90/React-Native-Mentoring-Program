@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-import { WarningStyles } from './styles';
+import styles from './styles';
 
-export const FormWarning = props => (
-    <View style={WarningStyles.errorContainer}>
-        <Text style={WarningStyles.error}>{props.error}</Text>
+const FormWarning = props => (
+    <View style={styles.errorContainer}>
+        <Text style={styles.error}>{props.error}</Text>
     </View>
 );
+
+export default FormWarning;

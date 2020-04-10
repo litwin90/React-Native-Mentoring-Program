@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { Group } from './group/group';
-import { ProductList } from './product-list/product-list';
-import Styles from './styles';
+import Group from './group/group';
+import ProductList from './product-list/product-list';
+import styles from './styles';
 import Header from '../common/header/header';
 import Divider from '../common/divider/divider';
 import { PRODUCTS } from '../../app/constants';
 
-export class Main extends Component {
+class Main extends Component {
     constructor() {
         super();
         this.groups = PRODUCTS;
@@ -23,18 +23,20 @@ export class Main extends Component {
 
     render() {
         return (
-            <View style={Styles.wrapper}>
+            <View style={styles.wrapper}>
                 <Header title="Ecommerce Store" menuButton={true} />
-                <View style={Styles.groupsScrollable}>
+                <View style={styles.groupsScrollable}>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        <View style={Styles.groups}>{this.getGroupsJSX()}</View>
+                        <View style={styles.groups}>{this.getGroupsJSX()}</View>
                     </ScrollView>
                 </View>
                 <Divider />
-                <View style={Styles.items}>
+                <View style={styles.items}>
                     <ProductList currentGroup={this.currentGroup} />
                 </View>
             </View>
         );
     }
 }
+
+export default Main;

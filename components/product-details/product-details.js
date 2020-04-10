@@ -20,13 +20,9 @@ class ProductDetails extends Component {
         return `${item.discount}% Off`;
     }
 
-    addToWishList() {
-        console.log('add to wish list');
-    }
+    addToWishList() {}
 
-    addToCart() {
-        console.log('add to cart');
-    }
+    addToCart() {}
     render() {
         return (
             <ScrollView>
