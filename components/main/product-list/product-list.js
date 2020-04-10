@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {View, Text, TouchableHighlight} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, TouchableHighlight } from 'react-native';
 
 import Styles from './styles';
-import {BaseStyles} from '../../../app.styles';
-import {Product} from './product/product';
+import { BaseStyles } from '../../../app.styles';
+import Product from '../../common/product';
 
 export class ProductList extends Component {
     viewAllGroupItems() {}

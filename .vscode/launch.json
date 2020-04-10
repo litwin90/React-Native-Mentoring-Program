@@ -10,6 +10,7 @@
             "type": "reactnative",
             "request": "launch",
             "platform": "android",
+            "trace": "log"
         },
         {
             "type": "node",
@@ -19,6 +20,6 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\start"
-        }
+        },
     ]
 }

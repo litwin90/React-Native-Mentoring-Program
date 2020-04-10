@@ -3,6 +3,10 @@ import { BaseStyles } from '../../../app.styles';
 
 export const SearchStyles = StyleSheet.create({
     wrapper: {
+        padding: BaseStyles.padding.l,
+        backgroundColor: BaseStyles.colors.lightBlue,
+    },
+    inputWrapper: {
         backgroundColor: BaseStyles.colors.white,
         borderRadius: 10,
         borderColor: 'white',
@@ -10,10 +14,5 @@ export const SearchStyles = StyleSheet.create({
     },
     input: {
         height: 40,
-    },
-    searchIcon: {
-        marginLeft: BaseStyles.margin.l,
-        marginRight: BaseStyles.margin.s,
-        alignSelf: 'center',
     },
 });

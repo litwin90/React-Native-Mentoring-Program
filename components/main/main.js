@@ -1,63 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight, ScrollView } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faBars, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { ScrollView, View } from 'react-native';
 
-import Styles from './styles';
-import { BaseStyles } from '../../app.styles';
-import { Search } from '../common/search/search';
 import { Group } from './group/group';
 import { ProductList } from './product-list/product-list';
+import Styles from './styles';
+import Header from '../common/header/header';
+import Divider from '../common/divider/divider';
+import { PRODUCTS } from '../../app/constants';
 
 export class Main extends Component {
     constructor() {
         super();
-        this.groups = [
-            {
-                id: 'dsfvdsfvdsfv',
-                name: 'Electronics',
-                source: require('../../img/electronics1.jpg'),
-                items: [
-                    {
-                        id: 'servevesrvsrverv',
-                        name: 'Phone 1',
-                        price: 233,
-                        oldPrice: 250,
-                        discount: 10,
-                        source: require('../../img/Phone1.jpg'),
-                    },
-                    {
-                        id: 'servevessdcsdcrvsrverv',
-                        name: 'Phone 2',
-                        price: 233,
-                        oldPrice: 250,
-                        discount: 10,
-                        source: require('../../img/Phone1.jpg'),
-                    },
-                    {
-                        id: 'servevesrvssdcsdcrverv',
-                        name: 'Phone 3',
-                        price: 233,
-                        oldPrice: 250,
-                        discount: 10,
-                        source: require('../../img/Phone1.jpg'),
-                    },
-                ],
-            },
-            { id: 'efvedvevewvr', name: 'Cloth', source: require('../../img/cloth.jpg') },
-            { id: 'sdfdscdscvdsfvsdfvsdf', name: 'Furniture', source: require('../../img/furniture.jpg') },
-            { id: 'easdcsdcfvedvevewvr', name: 'Electronics', source: require('../../img/electronics1.jpg') },
-            { id: 'efvedveveasdcsadcwvr', name: 'Cloth', source: require('../../img/cloth.jpg') },
-            { id: 'efveevervdvevewvr', name: 'Furniture', source: require('../../img/furniture.jpg') },
-        ];
+        this.groups = PRODUCTS;
         this.currentGroup = this.groups[0];
-    }
-    openMenu() {}
-
-    openWishList() {}
-
-    onSearch(text) {
-        return text;
     }
 
     getGroupsJSX() {
@@ -68,38 +23,15 @@ export class Main extends Component {
 
     render() {
         return (
-            <View style={Styles.main.wrapper}>
-                <View style={Styles.main.header}>
-                    <TouchableHighlight
-                        style={Styles.main.menuButton}
-                        underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
-                        hitSlop={BaseStyles.buttonHitSlop}
-                        onPress={() => this.openMenu()}>
-                        <FontAwesomeIcon icon={faBars} size={BaseStyles.fontSize.l} color={BaseStyles.colors.white} />
-                    </TouchableHighlight>
-                    <Text style={Styles.main.title}>Ecommerce Store</Text>
-                    <TouchableHighlight
-                        style={Styles.main.menuButton}
-                        hitSlop={BaseStyles.buttonHitSlop}
-                        underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
-                        onPress={() => this.openWishList()}>
-                        <FontAwesomeIcon
-                            icon={faShoppingCart}
-                            size={BaseStyles.fontSize.l}
-                            color={BaseStyles.colors.white}
-                        />
-                    </TouchableHighlight>
-                </View>
-                <View style={Styles.main.search}>
-                    <Search />
-                </View>
-                <View style={Styles.main.groupsScrollable}>
+            <View style={Styles.wrapper}>
+                <Header title="Ecommerce Store" menuButton={true} />
+                <View style={Styles.groupsScrollable}>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        <View style={Styles.main.groups}>{this.getGroupsJSX()}</View>
+                        <View style={Styles.groups}>{this.getGroupsJSX()}</View>
                     </ScrollView>
                 </View>
-                <View style={Styles.main.divider} />
-                <View style={Styles.main.items}>
+                <Divider />
+                <View style={Styles.items}>
                     <ProductList currentGroup={this.currentGroup} />
                 </View>
             </View>

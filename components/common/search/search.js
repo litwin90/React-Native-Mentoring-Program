@@ -1,35 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { TextInput, View } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import { SearchStyles } from './styles';
 import { BaseStyles } from '../../../app.styles';
+import SearchIcon from '../search-icon/search-icon';
 
-export class Search extends Component {
-    constructor() {
-        super();
-        this.searchPlaceholder = 'Search for product';
-    }
-    onSearch(text) {
-        console.log(text);
-    }
-    render() {
+const Search = ({ isSearchVisible }) => {
+    const placeHolder = 'Search for product';
+    if (isSearchVisible) {
         return (
             <View style={SearchStyles.wrapper}>
-                <FontAwesomeIcon
-                    style={SearchStyles.searchIcon}
-                    icon={faSearch}
-                    size={BaseStyles.fontSize.l}
-                    color={BaseStyles.colors.grey}
-                />
-                <TextInput
-                    onChangeText={text => this.onSearch(text)}
-                    style={SearchStyles.input}
-                    placeholder={this.searchPlaceholder}
-                    placeholderTextColor={BaseStyles.colors.gray}
-                />
+                <View style={SearchStyles.inputWrapper}>
+                    <SearchIcon needToDisplay={true} />
+                    <TextInput
+                        style={SearchStyles.input}
+                        placeholder={placeHolder}
+                        placeholderTextColor={BaseStyles.colors.gray}
+                    />
+                </View>
             </View>
         );
+    } else {
+        return null;
     }
-}
+};
+
+export default Search;
