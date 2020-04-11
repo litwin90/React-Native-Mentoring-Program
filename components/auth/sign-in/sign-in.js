@@ -6,6 +6,7 @@ import ValidationComponent from 'react-native-form-validator';
 import styles, { BackgroundGradientColors } from './styles';
 import { BaseStyles } from '../../../app.styles';
 import FormWarning from '../form-warning/form-warning';
+import { login } from '../../../app/services/auth';
 
 class SignIn extends ValidationComponent {
     constructor(props) {
@@ -48,12 +49,13 @@ class SignIn extends ValidationComponent {
     onRestorePassword() {}
 
     onSignIn() {
-        this.checkEmailField();
-        this.checkPasswordField();
-        if (!this.isFormValid()) {
-        } else {
-            this.clearForm();
-        }
+        login('litwin90', 'rnmp');
+        // this.checkEmailField();
+        // this.checkPasswordField();
+        // if (!this.isFormValid()) {
+        // } else {
+        //     login('litwin90', 'rnmp');
+        // }
     }
 
     validateForm() {
