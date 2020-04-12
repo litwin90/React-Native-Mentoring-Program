@@ -1,4 +1,4 @@
-export function login() {
+export function signIn({ email, userName, password }) {
     const myHeaders = new Headers();
     myHeaders.append(
         'Cookie',
@@ -6,8 +6,13 @@ export function login() {
     );
 
     const formData = new FormData();
-    formData.append('loginname', 'litwin90');
-    formData.append('password', 'rnmp');
+    if (email) {
+        formData.append('email', email);
+    }
+    if (userName) {
+        formData.append('loginname', userName);
+    }
+    formData.append('password', password);
 
     const requestOptions = {
         method: 'POST',
@@ -15,8 +20,5 @@ export function login() {
         body: formData,
     };
 
-    fetch('http://34.73.95.65/index.php?rt=a/account/login', requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+    return fetch('http://34.73.95.65/index.php?rt=a/account/login', requestOptions).then(response => response.json());
 }
