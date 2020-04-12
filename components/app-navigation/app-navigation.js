@@ -9,6 +9,7 @@ import ProductDetails from '../product-details/product-details';
 import Main from '../main/main';
 import SignIn from '../auth/sign-in/sign-in';
 import SignUp from '../auth/sign-up/sign-up';
+import RestorePassword from '../auth/restore-password/restore-password';
 
 const Stack = createStackNavigator();
 
@@ -61,6 +62,13 @@ const AppNavigation = () => {
                         <Stack.Screen
                             name="SignUp"
                             component={SignUp}
+                            options={{
+                                header: () => null,
+                            }}
+                        />
+                        <Stack.Screen
+                            name="RestorePassword"
+                            component={RestorePassword}
                             options={{
                                 header: () => null,
                             }}

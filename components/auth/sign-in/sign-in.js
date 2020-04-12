@@ -6,22 +6,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles, { BackgroundGradientColors } from './styles';
 import { BaseStyles } from '../../../app.styles';
 import FormWarning from '../form-warning/form-warning';
-import { fetchSignIn, setSignInEmail, setSignInPassword, setSignInUserName } from '../authSlice';
+import { AuthActions, fetchSignIn } from '../authSlice';
 import { isEmail } from '../utils';
 
 function onChangeEmailField(dispatch, text) {
     if (isEmail(text)) {
-        dispatch(setSignInEmail({ email: text }));
+        dispatch(AuthActions.setSignInEmail({ email: text }));
     } else {
-        dispatch(setSignInUserName({ userName: text }));
+        dispatch(AuthActions.setSignInUserName({ userName: text }));
     }
 }
 
 function onChangePasswordField(dispatch, password) {
-    dispatch(setSignInPassword({ password }));
+    dispatch(AuthActions.setSignInPassword({ password }));
 }
 
-function restorePassword() {}
+function restorePassword({ navigation }) {
+    navigation.navigate('RestorePassword');
+}
 
 function requestSignIn(dispatch, { email, userName, password }) {
     dispatch(fetchSignIn({ email, userName, password }));
@@ -37,9 +39,6 @@ const SignIn = ({ navigation }) => {
     const { email, password, userName } = useSelector(state => state.auth.signInForm);
     const { signInError } = useSelector(state => state.auth);
 
-    const defaultEmailPlaceholder = 'Email Address or Login';
-    const defaultPasswordPlaceholder = 'Password';
-
     return (
         <ScrollView>
             <LinearGradient colors={BackgroundGradientColors} style={styles.container}>
@@ -49,7 +48,7 @@ const SignIn = ({ navigation }) => {
                         value={email || userName}
                         onChangeText={text => onChangeEmailField(dispatch, text)}
                         style={styles.input}
-                        placeholder={defaultEmailPlaceholder}
+                        placeholder="Email Address or Login"
                         placeholderTextColor={BaseStyles.colors.black}
                         autoCompleteType="email"
                         blurOnSubmit={true}
@@ -61,7 +60,7 @@ const SignIn = ({ navigation }) => {
                         value={password}
                         onChangeText={updatePassword => onChangePasswordField(dispatch, updatePassword)}
                         style={styles.input}
-                        placeholder={defaultPasswordPlaceholder}
+                        placeholder="Password"
                         placeholderTextColor={BaseStyles.colors.black}
                         autoCompleteType="password"
                         importantForAutofill="yes"
@@ -73,7 +72,7 @@ const SignIn = ({ navigation }) => {
                         underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
                         hitSlop={BaseStyles.buttonHitSlop}
                         style={styles.restorePassword}
-                        onPress={() => restorePassword()}>
+                        onPress={() => restorePassword({ navigation })}>
                         <Text style={styles.link}>Forgot Password?</Text>
                     </TouchableHighlight>
                     <TouchableHighlight

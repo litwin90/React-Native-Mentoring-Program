@@ -1,16 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { signIn } from '../../app/services/auth';
+import { signIn, signOut, restorePassword } from '../../app/services/auth';
 
 const initialState = {
     isSignedIn: false,
     isLoading: false,
     userToken: undefined,
     signInError: undefined,
+    signOutError: undefined,
     signInForm: {
         userName: undefined,
         email: undefined,
         password: undefined,
+    },
+    restorePasswordForm: {
+        email: undefined,
+        password: undefined,
+        isLoading: false,
+        error: undefined,
     },
 };
 
@@ -41,6 +48,10 @@ const authSlice = createSlice({
         getSuccessSignOut(state, action) {
             state = initialState;
         },
+        getFailedSignOut(state, action) {
+            state.isLoading = false;
+            state.signOutError = action.payload.error;
+        },
         setSignInEmail(state, action) {
             state.signInForm.email = action.payload.email;
             state.signInForm.userName = undefined;
@@ -52,29 +63,70 @@ const authSlice = createSlice({
         setSignInPassword(state, action) {
             state.signInForm.password = action.payload.password;
         },
+        restorePasswordRequest(state) {
+            state.restorePasswordForm.isLoading = true;
+        },
+        setRestorePasswordFormEmail(state, action) {
+            state.restorePasswordForm.email = action.payload.email;
+        },
+        getSuccessPasswordRestore(state, action) {
+            state.restorePasswordForm.isLoading = false;
+            state.restorePasswordForm.password = action.payload.password;
+        },
+        getFailedPasswordRestore(state, action) {
+            state.restorePasswordForm.isLoading = false;
+            state.restorePasswordForm.error = action.payload.error;
+        },
     },
 });
 
-export const {
-    signInRequest,
-    signOutRequest,
-    getFailedSignIn,
-    getSuccessSignIn,
-    getSuccessSignOut,
-    setSignInEmail,
-    setSignInUserName,
-    setSignInPassword,
-} = authSlice.actions;
+export const AuthActions = {
+    ...authSlice.actions,
+};
 
 export default authSlice.reducer;
 
 export const fetchSignIn = ({ email, userName, password }) => dispatch => {
-    dispatch(signInRequest());
-    signIn({ email, userName, password }).then(signInResult => {
-        if (signInResult.status === 1) {
-            dispatch(getSuccessSignIn({ token: signInResult.token }));
-        } else {
-            dispatch(getFailedSignIn({ error: signInResult.error }));
-        }
-    });
+    dispatch(AuthActions.signInRequest());
+    signIn({ email, userName, password })
+        .then(({ status, token, error }) => {
+            if (status === 1) {
+                dispatch(AuthActions.getSuccessSignIn({ token }));
+            } else {
+                dispatch(AuthActions.getFailedSignIn({ error }));
+            }
+        })
+        .catch(error => {
+            dispatch(AuthActions.getFailedSignIn({ error }));
+        });
+};
+
+export const fetchSignOut = ({ token }) => dispatch => {
+    dispatch(AuthActions.signOutRequest());
+    signOut({ token })
+        .then(({ status, error }) => {
+            if (status === 1) {
+                dispatch(AuthActions.getSuccessSignOut());
+            } else {
+                dispatch(AuthActions.getFailedSignOut({ error }));
+            }
+        })
+        .catch(error => {
+            dispatch(AuthActions.getFailedSignOut({ error }));
+        });
+};
+
+export const fetchRestorePassword = ({ email }) => dispatch => {
+    dispatch(AuthActions.restorePasswordRequest());
+    restorePassword({ email })
+        .than(({ status, password, error }) => {
+            if (status === 1) {
+                dispatch(AuthActions.getSuccessPasswordRestore({ password }));
+            } else {
+                dispatch(AuthActions.getFailedPasswordRestore({ error }));
+            }
+        })
+        .catch(error => {
+            dispatch(AuthActions.getFailedPasswordRestore({ error }));
+        });
 };
