@@ -16,7 +16,9 @@ class Header extends Component {
         this.isSearchInputDisplayed = false;
     }
     openMenu() {}
-    goBack() {}
+    goBack() {
+        this.props.goToMain();
+    }
 
     openWishList() {}
 

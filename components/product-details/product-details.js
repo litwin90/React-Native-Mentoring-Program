@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 
-import Header from '../common/header/header';
+// import Header from '../common/header/header';
 import Divider from '../common/divider/divider';
 import Product from '../common/product/product';
 import ColorSelect from './color-select/color-select';
@@ -23,16 +23,20 @@ class ProductDetails extends Component {
     addToWishList() {}
 
     addToCart() {}
+
+    goBack() {
+        this.props.navigation.goBack();
+    }
+
     render() {
         return (
             <ScrollView>
-                <Header />
-                <Product item={this.props.item} isExtended={true} />
+                <Product item={this.props.route.params.product} isExtended={true} />
                 <Divider />
-                <ColorSelect colors={this.props.item.colors} />
+                <ColorSelect colors={this.props.route.params.product.colors} />
                 <Divider />
                 <ProductDescription
-                    description={this.props.item.description}
+                    description={this.props.route.params.product.description}
                     wishList={() => {
                         this.addToWishList();
                     }}

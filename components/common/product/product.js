@@ -41,6 +41,19 @@ class Product extends Component {
         ) : null;
     }
 
+    getStockButtonGSX() {
+        return this.props.isExtended ? (
+            <TouchableOpacity
+                onPress={() => {
+                    this.stock();
+                }}>
+                <View style={this.styles.stockWrapper}>
+                    <Text style={this.styles.stock}>In Stock</Text>
+                </View>
+            </TouchableOpacity>
+        ) : null;
+    }
+
     getControlGSX(image) {
         return (
             <TouchableOpacity
@@ -60,18 +73,13 @@ class Product extends Component {
 
     render() {
         return (
-            <View style={this.styles.wrapper}>
+            <TouchableOpacity
+                style={this.styles.wrapper}
+                onPress={() => this.props.gotoProductDetails(this.props.item)}>
                 <View style={this.styles.imageWrapper}>
                     <Image source={this.currentImage.source} style={this.styles.image} />
                 </View>
-                <TouchableOpacity
-                    onPress={() => {
-                        this.stock();
-                    }}>
-                    <View style={this.styles.stockWrapper}>
-                        <Text style={this.styles.stock}>In Stock</Text>
-                    </View>
-                </TouchableOpacity>
+                {this.getStockButtonGSX()}
                 {this.getControlsGSX()}
                 <Text style={this.styles.name}>{this.props.item.name}</Text>
                 <View style={this.styles.priceWrapper}>
@@ -79,7 +87,7 @@ class Product extends Component {
                     <Text style={this.styles.oldPrice}>{this.getOldPriceString(this.props.item)}</Text>
                     <Text style={this.styles.discount}>{this.getDiscountString(this.props.item)}</Text>
                 </View>
-            </View>
+            </TouchableOpacity>
         );
     }
 }

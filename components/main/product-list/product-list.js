@@ -24,7 +24,15 @@ class ProductList extends Component {
     }
 
     getProducts() {
-        return this.props.currentGroup.items.map(item => <Product item={item} key={item.id} />);
+        return this.props.currentGroup.items.map(item => (
+            <Product
+                item={item}
+                key={item.id}
+                gotoProductDetails={() => {
+                    this.props.gotoProductDetails(item);
+                }}
+            />
+        ));
     }
 
     render() {

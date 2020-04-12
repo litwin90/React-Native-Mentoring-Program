@@ -4,7 +4,7 @@ import { ScrollView, View } from 'react-native';
 import Group from './group/group';
 import ProductList from './product-list/product-list';
 import styles from './styles';
-import Header from '../common/header/header';
+// import Header from '../common/header/header';
 import Divider from '../common/divider/divider';
 import { PRODUCTS } from '../../app/constants';
 
@@ -21,10 +21,13 @@ class Main extends Component {
         });
     }
 
+    gotoProductDetails(product) {
+        this.props.navigation.navigate('ProductDetails', { product: product });
+    }
+
     render() {
         return (
             <View style={styles.wrapper}>
-                <Header title="Ecommerce Store" menuButton={true} />
                 <View style={styles.groupsScrollable}>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         <View style={styles.groups}>{this.getGroupsJSX()}</View>
@@ -32,7 +35,12 @@ class Main extends Component {
                 </View>
                 <Divider />
                 <View style={styles.items}>
-                    <ProductList currentGroup={this.currentGroup} />
+                    <ProductList
+                        currentGroup={this.currentGroup}
+                        gotoProductDetails={product => {
+                            this.gotoProductDetails(product);
+                        }}
+                    />
                 </View>
             </View>
         );

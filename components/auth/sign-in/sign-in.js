@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextInput, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
+import { Text, TextInput, TouchableHighlight, KeyboardAvoidingView, ScrollView } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import ValidationComponent from 'react-native-form-validator';
 
@@ -74,61 +74,65 @@ class SignIn extends ValidationComponent {
         this.setState({ email: '', password: '' });
     }
 
-    onSignUp() {}
+    goToSignUp() {
+        this.props.navigation.navigate('SignUp');
+    }
 
     render() {
         return (
-            <LinearGradient colors={BackgroundGradientColors} style={styles.container}>
-                <KeyboardAvoidingView behavior="position" style={styles.container}>
-                    <Text style={styles.title}>Ecommerce Store</Text>
-                    <TextInput
-                        value={this.state.email}
-                        onChangeText={text => this.onChangeEmail(text)}
-                        style={styles.input}
-                        placeholder={this.defaultEmailPlaceholder}
-                        placeholderTextColor={BaseStyles.colors.black}
-                        autoCompleteType="email"
-                        blurOnSubmit={true}
-                        importantForAutofill="yes"
-                        keyboardType="email-address"
-                        textContentType="emailAddress"
-                    />
-                    {this.emailError ? <FormWarning error={this.emailError} /> : null}
-                    <TextInput
-                        value={this.state.password}
-                        onChangeText={text => this.onChangePassword(text)}
-                        style={styles.input}
-                        placeholder={this.defaultPasswordPlaceholder}
-                        placeholderTextColor={BaseStyles.colors.black}
-                        autoCompleteType="password"
-                        importantForAutofill="yes"
-                        secureTextEntry={true}
-                        textContentType="password"
-                    />
-                    {this.passwordError ? <FormWarning error={this.passwordError} /> : null}
-                    <TouchableHighlight
-                        underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
-                        hitSlop={BaseStyles.buttonHitSlop}
-                        style={styles.restorePassword}
-                        onPress={() => this.onRestorePassword()}>
-                        <Text style={styles.link}>Forgot Password?</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        style={styles.signInButton}
-                        underlayColor={BaseStyles.colors.lightBlue}
-                        hitSlop={BaseStyles.buttonHitSlop}
-                        onPress={() => this.onSignIn()}>
-                        <Text style={styles.signInText}>Sign in</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
-                        hitSlop={BaseStyles.buttonHitSlop}
-                        style={styles.signUp}
-                        onPress={() => this.onSignUp()}>
-                        <Text style={styles.link}>New Here? Sign Up?</Text>
-                    </TouchableHighlight>
-                </KeyboardAvoidingView>
-            </LinearGradient>
+            <ScrollView>
+                <LinearGradient colors={BackgroundGradientColors} style={styles.container}>
+                    <KeyboardAvoidingView behavior="position" style={styles.container}>
+                        <Text style={styles.title}>Ecommerce Store</Text>
+                        <TextInput
+                            value={this.state.email}
+                            onChangeText={text => this.onChangeEmail(text)}
+                            style={styles.input}
+                            placeholder={this.defaultEmailPlaceholder}
+                            placeholderTextColor={BaseStyles.colors.black}
+                            autoCompleteType="email"
+                            blurOnSubmit={true}
+                            importantForAutofill="yes"
+                            keyboardType="email-address"
+                            textContentType="emailAddress"
+                        />
+                        {this.emailError ? <FormWarning error={this.emailError} /> : null}
+                        <TextInput
+                            value={this.state.password}
+                            onChangeText={text => this.onChangePassword(text)}
+                            style={styles.input}
+                            placeholder={this.defaultPasswordPlaceholder}
+                            placeholderTextColor={BaseStyles.colors.black}
+                            autoCompleteType="password"
+                            importantForAutofill="yes"
+                            secureTextEntry={true}
+                            textContentType="password"
+                        />
+                        {this.passwordError ? <FormWarning error={this.passwordError} /> : null}
+                        <TouchableHighlight
+                            underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
+                            hitSlop={BaseStyles.buttonHitSlop}
+                            style={styles.restorePassword}
+                            onPress={() => this.onRestorePassword()}>
+                            <Text style={styles.link}>Forgot Password?</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            style={styles.signInButton}
+                            underlayColor={BaseStyles.colors.lightBlue}
+                            hitSlop={BaseStyles.buttonHitSlop}
+                            onPress={() => this.onSignIn()}>
+                            <Text style={styles.signInText}>Sign in</Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
+                            hitSlop={BaseStyles.buttonHitSlop}
+                            style={styles.signUp}
+                            onPress={() => this.goToSignUp()}>
+                            <Text style={styles.link}>New Here? Sign Up?</Text>
+                        </TouchableHighlight>
+                    </KeyboardAvoidingView>
+                </LinearGradient>
+            </ScrollView>
         );
     }
 }
