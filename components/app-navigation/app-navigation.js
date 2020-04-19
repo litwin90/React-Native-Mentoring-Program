@@ -3,8 +3,6 @@ import { useSelector } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
-import { BaseStyles } from '../../app.styles';
-
 import ProductDetails from '../product-details/product-details';
 import Main from '../main/main';
 import SignIn from '../auth/sign-in/sign-in';
@@ -24,15 +22,7 @@ const AppNavigation = () => {
                             name="Main"
                             component={Main}
                             options={{
-                                title: 'Products',
-                                headerStyle: {
-                                    backgroundColor: BaseStyles.colors.lightBlue,
-                                    height: 50,
-                                },
-                                headerTintColor: BaseStyles.colors.white,
-                                headerTitleStyle: {
-                                    fontWeight: 'bold',
-                                },
+                                header: () => null,
                             }}
                         />
                         <Stack.Screen
@@ -40,13 +30,7 @@ const AppNavigation = () => {
                             component={ProductDetails}
                             options={({ route }) => ({
                                 title: route.params.product.name,
-                                headerStyle: {
-                                    backgroundColor: BaseStyles.colors.lightBlue,
-                                },
-                                headerTintColor: BaseStyles.colors.white,
-                                headerTitleStyle: {
-                                    fontWeight: 'bold',
-                                },
+                                header: () => null,
                             })}
                         />
                     </>
