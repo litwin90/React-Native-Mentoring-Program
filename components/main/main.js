@@ -27,7 +27,7 @@ class Main extends Component {
     }
 
     gotoProductDetails(product) {
-        this.props.navigation.navigate(MAIN_ROUTES.PRODUCT_DETAILS, { product: product });
+        this.props.navigation.navigate(MAIN_ROUTES.PRODUCT_DETAILS.name, { product: product });
     }
 
     getTitle() {

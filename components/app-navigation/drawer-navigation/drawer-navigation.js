@@ -13,6 +13,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import { MAIN_ROUTES } from '../routes';
+
+import Profile from '../../profile/profile';
 import Main from '../../main/main';
 import FakeText from '../fake-component';
 import styles from './styles';
@@ -31,7 +33,7 @@ function CustomDrawerContent({ navigation }) {
                     <Text style={styles.groupHeaderTitle}>My Account</Text>
                 </View>
                 <DrawerItem
-                    label="My Profile"
+                    label={MAIN_ROUTES.PROFILE.title}
                     labelStyle={styles.itemLabel}
                     style={styles.item}
                     icon={() => (
@@ -42,10 +44,10 @@ function CustomDrawerContent({ navigation }) {
                             color={BaseStyles.colors.blue}
                         />
                     )}
-                    onPress={() => navigation.navigate(MAIN_ROUTES.PROFILE)}
+                    onPress={() => navigation.navigate(MAIN_ROUTES.PROFILE.name, { title: MAIN_ROUTES.PROFILE.title })}
                 />
                 <DrawerItem
-                    label="My Wish List"
+                    label={MAIN_ROUTES.WISH_LIST.title}
                     labelStyle={styles.itemLabel}
                     style={styles.item}
                     icon={() => (
@@ -56,10 +58,10 @@ function CustomDrawerContent({ navigation }) {
                             color={BaseStyles.colors.blue}
                         />
                     )}
-                    onPress={() => navigation.navigate(MAIN_ROUTES.WISH_LIST)}
+                    onPress={() => navigation.navigate(MAIN_ROUTES.WISH_LIST.name)}
                 />
                 <DrawerItem
-                    label="My Cart"
+                    label={MAIN_ROUTES.MY_CART.title}
                     labelStyle={styles.itemLabel}
                     style={styles.item}
                     icon={() => (
@@ -70,10 +72,10 @@ function CustomDrawerContent({ navigation }) {
                             color={BaseStyles.colors.blue}
                         />
                     )}
-                    onPress={() => navigation.navigate(MAIN_ROUTES.MY_CART)}
+                    onPress={() => navigation.navigate(MAIN_ROUTES.MY_CART.name)}
                 />
                 <DrawerItem
-                    label="My Orders"
+                    label={MAIN_ROUTES.MY_ORDERS.title}
                     labelStyle={styles.itemLabel}
                     style={styles.item}
                     icon={() => (
@@ -84,7 +86,7 @@ function CustomDrawerContent({ navigation }) {
                             color={BaseStyles.colors.blue}
                         />
                     )}
-                    onPress={() => navigation.navigate(MAIN_ROUTES.MY_ORDERS)}
+                    onPress={() => navigation.navigate(MAIN_ROUTES.MY_ORDERS.name)}
                 />
             </View>
 
@@ -93,7 +95,7 @@ function CustomDrawerContent({ navigation }) {
                     <Text style={styles.groupHeaderTitle}>Support</Text>
                 </View>
                 <DrawerItem
-                    label="Email"
+                    label={MAIN_ROUTES.EMAIL.name}
                     labelStyle={styles.itemLabel}
                     style={styles.item}
                     icon={() => (
@@ -104,10 +106,10 @@ function CustomDrawerContent({ navigation }) {
                             color={BaseStyles.colors.blue}
                         />
                     )}
-                    onPress={() => navigation.navigate(MAIN_ROUTES.MY_ORDERS)}
+                    onPress={() => navigation.navigate(MAIN_ROUTES.EMAIL.name)}
                 />
                 <DrawerItem
-                    label="Call"
+                    label={MAIN_ROUTES.CALL.name}
                     labelStyle={styles.itemLabel}
                     style={styles.item}
                     icon={() => (
@@ -118,7 +120,7 @@ function CustomDrawerContent({ navigation }) {
                             color={BaseStyles.colors.blue}
                         />
                     )}
-                    onPress={() => navigation.navigate(MAIN_ROUTES.MY_ORDERS)}
+                    onPress={() => navigation.navigate(MAIN_ROUTES.CALL.name)}
                 />
             </View>
 
@@ -127,7 +129,7 @@ function CustomDrawerContent({ navigation }) {
                     <Text style={styles.groupHeaderTitle}>Others</Text>
                 </View>
                 <DrawerItem
-                    label="Share"
+                    label={MAIN_ROUTES.SHARE.name}
                     labelStyle={styles.itemLabel}
                     style={styles.item}
                     icon={() => (
@@ -138,7 +140,7 @@ function CustomDrawerContent({ navigation }) {
                             color={BaseStyles.colors.blue}
                         />
                     )}
-                    onPress={() => navigation.navigate(MAIN_ROUTES.MY_ORDERS)}
+                    onPress={() => navigation.navigate(MAIN_ROUTES.SHARE.name)}
                 />
             </View>
         </DrawerContentScrollView>
@@ -146,12 +148,16 @@ function CustomDrawerContent({ navigation }) {
 }
 
 const MainDrawer = () => (
-    <Drawer.Navigator initialRouteName={MAIN_ROUTES.MAIN} drawerContent={CustomDrawerContent}>
-        <Drawer.Screen name={MAIN_ROUTES.MAIN} component={Main} />
-        <Drawer.Screen name={MAIN_ROUTES.PROFILE} component={FakeText} />
-        <Drawer.Screen name={MAIN_ROUTES.WISH_LIST} component={FakeText} />
-        <Drawer.Screen name={MAIN_ROUTES.MY_CART} component={FakeText} />
-        <Drawer.Screen name={MAIN_ROUTES.MY_ORDERS} component={FakeText} />
+    <Drawer.Navigator initialRouteName={MAIN_ROUTES.MAIN.name} drawerContent={CustomDrawerContent}>
+        <Drawer.Screen name={MAIN_ROUTES.MAIN.name} component={Main} />
+        <Drawer.Screen
+            name={MAIN_ROUTES.PROFILE.name}
+            component={Profile}
+            options={{ title: MAIN_ROUTES.PROFILE.title }}
+        />
+        <Drawer.Screen name={MAIN_ROUTES.WISH_LIST.name} component={FakeText} />
+        <Drawer.Screen name={MAIN_ROUTES.MY_CART.name} component={FakeText} />
+        <Drawer.Screen name={MAIN_ROUTES.MY_ORDERS.name} component={FakeText} />
     </Drawer.Navigator>
 );
 

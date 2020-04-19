@@ -19,14 +19,14 @@ const AppNavigation = () => {
                 {isSignedIn ? (
                     <>
                         <Stack.Screen
-                            name={MAIN_ROUTES.MAIN}
+                            name={MAIN_ROUTES.MAIN.name}
                             component={Drawer}
                             options={{
                                 header: () => null,
                             }}
                         />
                         <Stack.Screen
-                            name={MAIN_ROUTES.PRODUCT_DETAILS}
+                            name={MAIN_ROUTES.PRODUCT_DETAILS.name}
                             component={ProductDetails}
                             options={({ route }) => ({
                                 title: route.params.product.name,
@@ -36,7 +36,7 @@ const AppNavigation = () => {
                     </>
                 ) : (
                     <Stack.Screen
-                        name={MAIN_ROUTES.AUTH}
+                        name={MAIN_ROUTES.AUTH.name}
                         component={AuthNavigation}
                         options={{
                             header: () => null,
