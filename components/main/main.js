@@ -7,12 +7,17 @@ import styles from './styles';
 import Header from '../common/header/header';
 import Divider from '../common/divider/divider';
 import { PRODUCTS } from '../../app/constants';
+import { MAIN_ROUTES } from '../app-navigation/routes';
 
 class Main extends Component {
     constructor() {
         super();
         this.groups = PRODUCTS;
         this.currentGroup = this.groups[0];
+    }
+
+    openMenu() {
+        this.props.navigation.openDrawer();
     }
 
     getGroupsJSX() {
@@ -22,7 +27,7 @@ class Main extends Component {
     }
 
     gotoProductDetails(product) {
-        this.props.navigation.navigate('ProductDetails', { product: product });
+        this.props.navigation.navigate(MAIN_ROUTES.PRODUCT_DETAILS, { product: product });
     }
 
     getTitle() {
@@ -32,7 +37,13 @@ class Main extends Component {
     render() {
         return (
             <View style={styles.wrapper}>
-                <Header title={this.getTitle()} needToShowMenuButton={true} />
+                <Header
+                    title={this.getTitle()}
+                    needToShowMenuButton={true}
+                    openMenu={() => {
+                        this.openMenu();
+                    }}
+                />
                 <View style={styles.groupsScrollable}>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         <View style={styles.groups}>{this.getGroupsJSX()}</View>

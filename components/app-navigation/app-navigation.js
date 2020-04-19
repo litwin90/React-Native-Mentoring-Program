@@ -4,10 +4,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 import ProductDetails from '../product-details/product-details';
-import Main from '../main/main';
-import SignIn from '../auth/sign-in/sign-in';
-import SignUp from '../auth/sign-up/sign-up';
-import RestorePassword from '../auth/restore-password/restore-password';
+import AuthNavigation from './auth-navigation';
+import Drawer from './drawer-navigation/drawer-navigation';
+
+import { MAIN_ROUTES } from './routes';
 
 const Stack = createStackNavigator();
 
@@ -19,14 +19,14 @@ const AppNavigation = () => {
                 {isSignedIn ? (
                     <>
                         <Stack.Screen
-                            name="Main"
-                            component={Main}
+                            name={MAIN_ROUTES.MAIN}
+                            component={Drawer}
                             options={{
                                 header: () => null,
                             }}
                         />
                         <Stack.Screen
-                            name="ProductDetails"
+                            name={MAIN_ROUTES.PRODUCT_DETAILS}
                             component={ProductDetails}
                             options={({ route }) => ({
                                 title: route.params.product.name,
@@ -35,29 +35,13 @@ const AppNavigation = () => {
                         />
                     </>
                 ) : (
-                    <>
-                        <Stack.Screen
-                            name="SignIn"
-                            component={SignIn}
-                            options={{
-                                header: () => null,
-                            }}
-                        />
-                        <Stack.Screen
-                            name="SignUp"
-                            component={SignUp}
-                            options={{
-                                header: () => null,
-                            }}
-                        />
-                        <Stack.Screen
-                            name="RestorePassword"
-                            component={RestorePassword}
-                            options={{
-                                header: () => null,
-                            }}
-                        />
-                    </>
+                    <Stack.Screen
+                        name={MAIN_ROUTES.AUTH}
+                        component={AuthNavigation}
+                        options={{
+                            header: () => null,
+                        }}
+                    />
                 )}
             </Stack.Navigator>
         </NavigationContainer>
