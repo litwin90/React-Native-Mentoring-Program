@@ -16,10 +16,12 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: BaseStyles.colors.white,
     },
     group: {
         width: 80,
         alignItems: 'center',
+        justifyContent: 'center',
         marginRight: BaseStyles.margin.s,
         marginLeft: BaseStyles.margin.s,
         marginTop: BaseStyles.margin.m,

@@ -8,7 +8,6 @@ class Product extends Component {
         super(props);
 
         this.styles = this.props.isExtended ? ExtendedStyles : styles;
-        this.currentImage = this.props.item.images[0];
     }
 
     getPriceString(item) {
@@ -21,24 +20,6 @@ class Product extends Component {
 
     getDiscountString(item) {
         return `${item.discount}% Off`;
-    }
-
-    isActiveImage(image) {
-        return image.id === this.currentImage.id;
-    }
-
-    showImage(image) {
-        return (this.currentImage = image);
-    }
-
-    getControlsGSX() {
-        return this.props.isExtended ? (
-            <View style={this.styles.controlsWrapper}>
-                {this.props.item.images.map(image => (
-                    <View key={image.id}>{this.getControlGSX(image)}</View>
-                ))}
-            </View>
-        ) : null;
     }
 
     getStockButtonGSX() {
@@ -54,38 +35,23 @@ class Product extends Component {
         ) : null;
     }
 
-    getControlGSX(image) {
-        return (
-            <TouchableOpacity
-                onPress={() => {
-                    this.showImage(image);
-                }}>
-                {image.id === this.currentImage.id ? (
-                    <View style={this.styles.controlActive} />
-                ) : (
-                    <View style={this.styles.control} />
-                )}
-            </TouchableOpacity>
-        );
-    }
-
     stock() {}
 
     render() {
         return (
             <TouchableOpacity
                 style={this.styles.wrapper}
-                onPress={() => this.props.gotoProductDetails(this.props.item)}>
+                onPress={() => (this.props.isExtended ? null : this.props.gotoProductDetails(this.props.item))}>
                 <View style={this.styles.imageWrapper}>
-                    <Image source={this.currentImage.source} style={this.styles.image} />
+                    <Image source={{ uri: `http:${this.props.item.cell.thumb}` }} style={this.styles.image} />
                 </View>
                 {this.getStockButtonGSX()}
-                {this.getControlsGSX()}
-                <Text style={this.styles.name}>{this.props.item.name}</Text>
+                {/* {this.getControlsGSX()} */}
+                <Text style={this.styles.name}>{this.props.item.cell.name}</Text>
                 <View style={this.styles.priceWrapper}>
-                    <Text style={this.styles.price}>{this.getPriceString(this.props.item)}</Text>
-                    <Text style={this.styles.oldPrice}>{this.getOldPriceString(this.props.item)}</Text>
-                    <Text style={this.styles.discount}>{this.getDiscountString(this.props.item)}</Text>
+                    <Text style={this.styles.price}>{this.getPriceString(this.props.item.cell)}</Text>
+                    {/* <Text style={this.styles.oldPrice}>{this.getOldPriceString(this.props.item.cell)}</Text> */}
+                    {/* <Text style={this.styles.discount}>{this.getDiscountString(this.props.item.cell)}</Text> */}
                 </View>
             </TouchableOpacity>
         );

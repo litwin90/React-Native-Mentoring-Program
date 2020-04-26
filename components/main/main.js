@@ -1,66 +1,81 @@
-import React, { Component } from 'react';
-import { ScrollView, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { ScrollView, View, ActivityIndicator } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Group from './group/group';
-import ProductList from './product-list/product-list';
+import CategoryTitle from './category-title/category-title';
+import CategoryPreview from './category-preview/category-preview';
 import styles from './styles';
 import Header from '../common/header/header';
 import Divider from '../common/divider/divider';
-import { PRODUCTS } from '../../app/constants';
+import Warning from '../auth/form-warning/form-warning';
 import { MAIN_ROUTES } from '../app-navigation/routes';
+import { fetchCategories } from './mainSlice';
+import { BaseStyles } from '../../app.styles';
 
-class Main extends Component {
-    constructor() {
-        super();
-        this.groups = PRODUCTS;
-        this.currentGroup = this.groups[0];
-    }
+const openMenu = navigation => {
+    navigation.openDrawer();
+};
+const getCategoriesList = categories => {
+    return categories.map(category => {
+        return <CategoryTitle category={category} key={category.category_id} />;
+    });
+};
+const gotoProductDetails = ({ navigation, product }) => {
+    navigation.navigate(MAIN_ROUTES.PRODUCT_DETAILS.name, { product: product });
+};
 
-    openMenu() {
-        this.props.navigation.openDrawer();
-    }
+const Main = ({ navigation }) => {
+    const dispatch = useDispatch();
 
-    getGroupsJSX() {
-        return this.groups.map(group => {
-            return <Group group={group} key={group.id} />;
-        });
-    }
+    const { categories, isLoading, error, productsByCategoryId } = useSelector(state => state.main);
 
-    gotoProductDetails(product) {
-        this.props.navigation.navigate(MAIN_ROUTES.PRODUCT_DETAILS.name, { product: product });
-    }
+    useEffect(() => {
+        if (!isLoading && !error && !categories.length) {
+            dispatch(fetchCategories());
+        }
+    });
 
-    getTitle() {
-        return 'Products';
-    }
-
-    render() {
-        return (
-            <View style={styles.wrapper}>
-                <Header
-                    title={this.getTitle()}
-                    needToShowMenuButton={true}
-                    openMenu={() => {
-                        this.openMenu();
-                    }}
-                />
-                <View style={styles.groupsScrollable}>
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        <View style={styles.groups}>{this.getGroupsJSX()}</View>
-                    </ScrollView>
-                </View>
-                <Divider />
-                <View style={styles.items}>
-                    <ProductList
-                        currentGroup={this.currentGroup}
-                        gotoProductDetails={product => {
-                            this.gotoProductDetails(product);
-                        }}
-                    />
-                </View>
-            </View>
-        );
-    }
-}
+    return (
+        <View style={styles.wrapper}>
+            <Header
+                title="Products"
+                needToShowMenuButton={true}
+                openMenu={() => {
+                    openMenu(navigation);
+                }}
+            />
+            {isLoading ? (
+                <ActivityIndicator size="large" color={BaseStyles.colors.lightBlue} style={styles.spinner} />
+            ) : error ? (
+                <Warning error={error} />
+            ) : (
+                <>
+                    <View>
+                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                            <View style={styles.groups}>{getCategoriesList(categories)}</View>
+                        </ScrollView>
+                    </View>
+                    <Divider />
+                    <View>
+                        <ScrollView style={styles.items}>
+                            {categories.map(category => {
+                                return (
+                                    <CategoryPreview
+                                        category={category}
+                                        products={productsByCategoryId[category.category_id]}
+                                        gotoProductDetails={product => {
+                                            gotoProductDetails({ navigation, product });
+                                        }}
+                                        key={category.category_id}
+                                    />
+                                );
+                            })}
+                        </ScrollView>
+                    </View>
+                </>
+            )}
+        </View>
+    );
+};
 
 export default Main;

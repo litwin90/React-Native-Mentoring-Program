@@ -13,6 +13,7 @@ const ProductStyles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1,
         borderColor: BaseStyles.colors.lightGrey,
+        backgroundColor: BaseStyles.colors.white,
     },
     imageWrapper: {
         alignItems: 'center',
@@ -23,7 +24,7 @@ const ProductStyles = StyleSheet.create({
     },
     image: {
         height: 90,
-        width: 40,
+        width: 90,
     },
     priceWrapper: {
         flexDirection: 'row',
@@ -46,8 +47,8 @@ const ProductStyles = StyleSheet.create({
 export const ExtendedStyles = StyleSheet.create({
     wrapper: {
         flex: 1,
-        margin: BaseStyles.margin.xs,
         padding: BaseStyles.padding.m,
+        backgroundColor: BaseStyles.colors.white,
     },
     imageWrapper: {
         alignItems: 'center',
@@ -58,7 +59,7 @@ export const ExtendedStyles = StyleSheet.create({
     },
     image: {
         height: 250,
-        width: 120,
+        width: 250,
     },
     priceWrapper: {
         flexDirection: 'row',

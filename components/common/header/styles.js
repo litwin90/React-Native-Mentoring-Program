@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: BaseStyles.fontSize.m,
         color: BaseStyles.colors.white,
+        paddingLeft: BaseStyles.padding.l,
     },
 });
 
