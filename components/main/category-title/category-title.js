@@ -7,9 +7,13 @@ import { BaseStyles } from '../../../app.styles';
 
 const entities = new XmlEntities();
 
-const CategoryTitle = ({ category }) => {
+const CategoryTitle = ({ category, openCategoryProductList }) => {
     return (
-        <TouchableHighlight hitSlop={BaseStyles.buttonHitSlop}>
+        <TouchableHighlight
+            hitSlop={BaseStyles.buttonHitSlop}
+            onPress={() => {
+                openCategoryProductList(category);
+            }}>
             <View style={styles.group}>
                 <View style={styles.groupImageWrapper}>
                     <Image source={{ uri: `http:${category.thumb}` }} style={styles.groupImage} />

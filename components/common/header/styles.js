@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
         fontSize: BaseStyles.fontSize.m,
         color: BaseStyles.colors.white,
         paddingLeft: BaseStyles.padding.l,
+        flexBasis: 300,
     },
 });
 

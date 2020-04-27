@@ -9,6 +9,7 @@ export const MAIN_ROUTES = {
     EMAIL: { name: 'Email' },
     CALL: { name: 'Call' },
     SHARE: { name: 'Share' },
+    PRODUCT_LIST: { name: 'ProductList' },
 };
 
 export const AUTH_ROUTES = {

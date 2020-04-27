@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles, { BackgroundGradientColors } from './styles';
 import { BaseStyles } from '../../../app.styles';
 import FormWarning from '../form-warning/form-warning';
-import { AuthActions, fetchSignIn } from '../authSlice';
+import { AuthActions, fetchSignIn } from '../auth.slice';
 import { isEmail } from '../utils';
+import { AUTH_ROUTES } from '../../app-navigation/routes';
 
 function onChangeEmailField(dispatch, text) {
     if (isEmail(text)) {
@@ -30,7 +31,7 @@ function requestSignIn(dispatch, { email, userName, password }) {
 }
 
 function goToSignUp(navigation) {
-    navigation.navigate('SignUp');
+    navigation.navigate(AUTH_ROUTES.SIGN_OUT);
 }
 
 const SignIn = ({ navigation }) => {

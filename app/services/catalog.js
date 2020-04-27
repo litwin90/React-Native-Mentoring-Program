@@ -109,9 +109,10 @@ export function getCategories() {
 
 /**
  * @param {*} id - category id
- * @param {*} limit - limiting products count
+ * @param {*} limit - limiting products count in one page
+ * @param {*} page - number of page with results to get
  */
-export function getProductsByCategoryId(id, limit) {
+export function getProductsByCategoryId(id, limit = 10, page = 1) {
     const myHeaders = new Headers();
     myHeaders.append(
         'Cookie',
@@ -125,7 +126,7 @@ export function getProductsByCategoryId(id, limit) {
     };
 
     return fetch(
-        `http://34.73.95.65/index.php?rt=a/product/filter&category_id=${id}&rows=${limit}`,
+        `http://34.73.95.65/index.php?rt=a/product/filter&category_id=${id}&rows=${limit}&page=${page}`,
         requestOptions,
     ).then(response => response.json());
 }

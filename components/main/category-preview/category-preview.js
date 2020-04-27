@@ -8,24 +8,25 @@ import Product from '../../common/product/product';
 
 const entities = new XmlEntities();
 
-const viewAllGroupItems = () => {};
-const getCategoryHeader = category => (
+const getCategoryHeader = ({ category, openCategoryProductList }) => (
     <View style={styles.itemsHeader}>
         <Text style={styles.itemsHeaderTitle}>{entities.decode(category.name)}</Text>
         <TouchableHighlight
             style={styles.viewAllButton}
             hitSlop={BaseStyles.buttonHitSlop}
             underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
-            onPress={() => viewAllGroupItems()}>
+            onPress={() => {
+                openCategoryProductList(category);
+            }}>
             <Text style={styles.viewAllText}>View all</Text>
         </TouchableHighlight>
     </View>
 );
-const CategoryPreview = ({ category, products, gotoProductDetails }) => {
+const CategoryPreview = ({ category, products, gotoProductDetails, openCategoryProductList }) => {
     return (
         <View style={styles.wrapper}>
             <FlatList
-                ListHeaderComponent={() => getCategoryHeader(category)}
+                ListHeaderComponent={() => getCategoryHeader({ category, openCategoryProductList })}
                 data={products}
                 renderItem={({ item }) => {
                     return (

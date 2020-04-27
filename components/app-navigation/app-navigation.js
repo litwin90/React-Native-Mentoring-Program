@@ -8,6 +8,7 @@ import AuthNavigation from './auth-navigation';
 import Drawer from './drawer-navigation/drawer-navigation';
 
 import { MAIN_ROUTES } from './routes';
+import ProductList from '../product-list/product-list';
 
 const Stack = createStackNavigator();
 
@@ -28,10 +29,19 @@ const AppNavigation = () => {
                         <Stack.Screen
                             name={MAIN_ROUTES.PRODUCT_DETAILS.name}
                             component={ProductDetails}
-                            options={({ route }) => ({
-                                title: route.params.product.name,
+                            options={({ route }) => {
+                                return {
+                                    title: route.params.product.cell.name,
+                                    header: () => null,
+                                };
+                            }}
+                        />
+                        <Stack.Screen
+                            name={MAIN_ROUTES.PRODUCT_LIST.name}
+                            component={ProductList}
+                            options={{
                                 header: () => null,
-                            })}
+                            }}
                         />
                     </>
                 ) : (

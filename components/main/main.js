@@ -9,19 +9,28 @@ import Header from '../common/header/header';
 import Divider from '../common/divider/divider';
 import Warning from '../auth/form-warning/form-warning';
 import { MAIN_ROUTES } from '../app-navigation/routes';
-import { fetchCategories } from './mainSlice';
+import { fetchCategories } from './main.slice';
 import { BaseStyles } from '../../app.styles';
 
 const openMenu = navigation => {
     navigation.openDrawer();
 };
-const getCategoriesList = categories => {
+const getCategoriesList = (categories, navigation) => {
     return categories.map(category => {
-        return <CategoryTitle category={category} key={category.category_id} />;
+        return (
+            <CategoryTitle
+                category={category}
+                key={category.category_id}
+                openCategoryProductList={cat => openCategoryProductList(navigation, cat)}
+            />
+        );
     });
 };
 const gotoProductDetails = ({ navigation, product }) => {
-    navigation.navigate(MAIN_ROUTES.PRODUCT_DETAILS.name, { product: product });
+    navigation.navigate(MAIN_ROUTES.PRODUCT_DETAILS.name, { product });
+};
+const openCategoryProductList = (navigation, category) => {
+    navigation.navigate(MAIN_ROUTES.PRODUCT_LIST.name, { category });
 };
 
 const Main = ({ navigation }) => {
@@ -33,7 +42,7 @@ const Main = ({ navigation }) => {
         if (!isLoading && !error && !categories.length) {
             dispatch(fetchCategories());
         }
-    });
+    }, [isLoading, error, categories, dispatch]);
 
     return (
         <View style={styles.wrapper}>
@@ -52,7 +61,7 @@ const Main = ({ navigation }) => {
                 <>
                     <View>
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                            <View style={styles.groups}>{getCategoriesList(categories)}</View>
+                            <View style={styles.groups}>{getCategoriesList(categories, navigation)}</View>
                         </ScrollView>
                     </View>
                     <Divider />
@@ -67,6 +76,7 @@ const Main = ({ navigation }) => {
                                             gotoProductDetails({ navigation, product });
                                         }}
                                         key={category.category_id}
+                                        openCategoryProductList={cat => openCategoryProductList(navigation, cat)}
                                     />
                                 );
                             })}
