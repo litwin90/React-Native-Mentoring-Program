@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, TextInput, TouchableHighlight, KeyboardAvoidingView, ScrollView } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, TextInput, TouchableHighlight, KeyboardAvoidingView, ScrollView, LayoutAnimation } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,6 +9,7 @@ import FormWarning from '../form-warning/form-warning';
 import { AuthActions, fetchSignIn } from '../auth.slice';
 import { isEmail } from '../utils';
 import { AUTH_ROUTES } from '../../app-navigation/routes';
+import LoadingIndicator from '../../common/loading-indicator/loading-indicator';
 
 function onChangeEmailField(dispatch, text) {
     if (isEmail(text)) {
@@ -38,11 +39,15 @@ const SignIn = ({ navigation }) => {
     const dispatch = useDispatch();
 
     const { email, password, userName } = useSelector(state => state.auth.signInForm);
-    const { signInError } = useSelector(state => state.auth);
+    const { signInError, isLoading } = useSelector(state => state.auth);
+
+    useEffect(() => {
+        LayoutAnimation.easeInEaseOut();
+    });
 
     return (
-        <ScrollView>
-            <LinearGradient colors={BackgroundGradientColors} style={styles.container}>
+        <LinearGradient colors={BackgroundGradientColors} style={styles.container}>
+            <ScrollView>
                 <KeyboardAvoidingView behavior="position" style={styles.container}>
                     <Text style={styles.title}>Ecommerce Store</Text>
                     <TextInput
@@ -68,7 +73,7 @@ const SignIn = ({ navigation }) => {
                         secureTextEntry={true}
                         textContentType="password"
                     />
-                    {signInError ? <FormWarning error={signInError} /> : null}
+                    <FormWarning error={signInError} />
                     <TouchableHighlight
                         underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
                         hitSlop={BaseStyles.buttonHitSlop}
@@ -77,17 +82,24 @@ const SignIn = ({ navigation }) => {
                         <Text style={styles.link}>Forgot Password?</Text>
                     </TouchableHighlight>
                     <TouchableHighlight
-                        style={styles.signInButton}
+                        style={isLoading ? styles.signInButtonCollapsed : styles.signInButton}
                         underlayColor={BaseStyles.colors.lightBlue}
                         hitSlop={BaseStyles.buttonHitSlop}
-                        onPress={() =>
-                            requestSignIn(dispatch, {
-                                email,
-                                password,
-                                userName,
-                            })
-                        }>
-                        <Text style={styles.signInText}>Sign in</Text>
+                        onPress={() => {
+                            if (!isLoading) {
+                                LayoutAnimation.easeInEaseOut();
+                                requestSignIn(dispatch, {
+                                    email,
+                                    password,
+                                    userName,
+                                });
+                            }
+                        }}>
+                        {isLoading ? (
+                            <LoadingIndicator />
+                        ) : (
+                            <Text style={styles.signInText}>{signInError ? 'Try Again' : 'Sign In'}</Text>
+                        )}
                     </TouchableHighlight>
                     <TouchableHighlight
                         underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
@@ -97,8 +109,8 @@ const SignIn = ({ navigation }) => {
                         <Text style={styles.link}>New Here? Sign Up?</Text>
                     </TouchableHighlight>
                 </KeyboardAvoidingView>
-            </LinearGradient>
-        </ScrollView>
+            </ScrollView>
+        </LinearGradient>
     );
 };
 
