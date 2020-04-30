@@ -3,9 +3,9 @@ import { View, Text } from 'react-native';
 
 import styles from './styles';
 
-const FormWarning = props => (
+const FormWarning = ({ error }) => (
     <View style={styles.errorContainer}>
-        <Text style={styles.error}>{props.error}</Text>
+        <Text style={styles.error}>{error}</Text>
     </View>
 );
 

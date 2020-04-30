@@ -10,7 +10,8 @@
             "type": "reactnative",
             "request": "launch",
             "platform": "android",
-            "trace": "log"
+            "trace": "log",
+            "sourceMaps": true,
         },
         {
             "type": "node",

@@ -1,4 +1,5 @@
-export function login() {
+export function signIn({ email, userName, password }) {
+    // eslint-disable-next-line no-undef
     const myHeaders = new Headers();
     myHeaders.append(
         'Cookie',
@@ -6,8 +7,13 @@ export function login() {
     );
 
     const formData = new FormData();
-    formData.append('loginname', 'litwin90');
-    formData.append('password', 'rnmp');
+    if (email) {
+        formData.append('email', email);
+    }
+    if (userName) {
+        formData.append('loginname', userName);
+    }
+    formData.append('password', password);
 
     const requestOptions = {
         method: 'POST',
@@ -15,8 +21,27 @@ export function login() {
         body: formData,
     };
 
-    fetch('http://34.73.95.65/index.php?rt=a/account/login', requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+    return fetch('http://34.73.95.65/index.php?rt=a/account/login', requestOptions).then(response => response.json());
+}
+
+export function signOut(token) {
+    // eslint-disable-next-line no-undef
+    const myHeaders = new Headers();
+    myHeaders.append('Cookie', 'language=en; currency=USD; PHPSESSID=e4185e936502dc70f973659032');
+
+    const formData = new FormData();
+    formData.append('token', token);
+
+    const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formData,
+        redirect: 'follow',
+    };
+
+    return fetch('http://34.73.95.65/index.php?rt=a/account/logout', requestOptions).then(response => response.json());
+}
+
+export function restorePassword(email) {
+    return Promise.reject(email);
 }

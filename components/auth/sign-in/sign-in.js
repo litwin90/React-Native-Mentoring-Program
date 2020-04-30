@@ -1,91 +1,55 @@
 import React from 'react';
-import { Text, TextInput, TouchableHighlight, KeyboardAvoidingView } from 'react-native';
+import { Text, TextInput, TouchableHighlight, KeyboardAvoidingView, ScrollView } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import ValidationComponent from 'react-native-form-validator';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles, { BackgroundGradientColors } from './styles';
 import { BaseStyles } from '../../../app.styles';
 import FormWarning from '../form-warning/form-warning';
-import { login } from '../../../app/services/auth';
+import { AuthActions, fetchSignIn } from '../auth.slice';
+import { isEmail } from '../utils';
+import { AUTH_ROUTES } from '../../app-navigation/routes';
 
-class SignIn extends ValidationComponent {
-    constructor(props) {
-        super(props);
-        this.state = { email: '', password: '' };
-        this.emailError = '';
-        this.passwordError = '';
-        this.defaultEmailPlaceholder = 'Email Address';
-        this.defaultPasswordPlaceholder = 'Password';
+function onChangeEmailField(dispatch, text) {
+    if (isEmail(text)) {
+        dispatch(AuthActions.setSignInEmail({ email: text }));
+    } else {
+        dispatch(AuthActions.setSignInUserName({ userName: text }));
     }
+}
 
-    checkEmailField() {
-        this.validateForm();
+function onChangePasswordField(dispatch, password) {
+    dispatch(AuthActions.setSignInPassword({ password }));
+}
 
-        if (this.isFieldInError('email')) {
-            this.emailError = this.getErrorsInField('email');
-        } else {
-            this.emailError = '';
-        }
-    }
+function restorePassword({ navigation }) {
+    navigation.navigate('RestorePassword');
+}
 
-    checkPasswordField() {
-        this.validateForm();
+function requestSignIn(dispatch, { email, userName, password }) {
+    dispatch(fetchSignIn({ email, userName, password }));
+}
 
-        if (this.isFieldInError('password')) {
-            this.passwordError = this.getErrorsInField('password');
-        } else {
-            this.passwordError = '';
-        }
-    }
+function goToSignUp(navigation) {
+    navigation.navigate(AUTH_ROUTES.SIGN_OUT);
+}
 
-    onChangeEmail(email) {
-        this.setState({ email });
-    }
+const SignIn = ({ navigation }) => {
+    const dispatch = useDispatch();
 
-    onChangePassword(password) {
-        this.setState({ password });
-    }
+    const { email, password, userName } = useSelector(state => state.auth.signInForm);
+    const { signInError } = useSelector(state => state.auth);
 
-    onRestorePassword() {}
-
-    onSignIn() {
-        login('litwin90', 'rnmp');
-        // this.checkEmailField();
-        // this.checkPasswordField();
-        // if (!this.isFormValid()) {
-        // } else {
-        //     login('litwin90', 'rnmp');
-        // }
-    }
-
-    validateForm() {
-        const passwordValidator = new RegExp(
-            '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})',
-        );
-        this.validate({
-            email: { required: true, email: true },
-            password: { required: true, any: passwordValidator },
-        });
-    }
-
-    clearForm() {
-        this.emailError = '';
-        this.passwordError = '';
-        this.setState({ email: '', password: '' });
-    }
-
-    onSignUp() {}
-
-    render() {
-        return (
+    return (
+        <ScrollView>
             <LinearGradient colors={BackgroundGradientColors} style={styles.container}>
                 <KeyboardAvoidingView behavior="position" style={styles.container}>
                     <Text style={styles.title}>Ecommerce Store</Text>
                     <TextInput
-                        value={this.state.email}
-                        onChangeText={text => this.onChangeEmail(text)}
+                        value={email || userName}
+                        onChangeText={text => onChangeEmailField(dispatch, text)}
                         style={styles.input}
-                        placeholder={this.defaultEmailPlaceholder}
+                        placeholder="Email Address or Login"
                         placeholderTextColor={BaseStyles.colors.black}
                         autoCompleteType="email"
                         blurOnSubmit={true}
@@ -93,44 +57,49 @@ class SignIn extends ValidationComponent {
                         keyboardType="email-address"
                         textContentType="emailAddress"
                     />
-                    {this.emailError ? <FormWarning error={this.emailError} /> : null}
                     <TextInput
-                        value={this.state.password}
-                        onChangeText={text => this.onChangePassword(text)}
+                        value={password}
+                        onChangeText={updatePassword => onChangePasswordField(dispatch, updatePassword)}
                         style={styles.input}
-                        placeholder={this.defaultPasswordPlaceholder}
+                        placeholder="Password"
                         placeholderTextColor={BaseStyles.colors.black}
                         autoCompleteType="password"
                         importantForAutofill="yes"
                         secureTextEntry={true}
                         textContentType="password"
                     />
-                    {this.passwordError ? <FormWarning error={this.passwordError} /> : null}
+                    {signInError ? <FormWarning error={signInError} /> : null}
                     <TouchableHighlight
                         underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
                         hitSlop={BaseStyles.buttonHitSlop}
                         style={styles.restorePassword}
-                        onPress={() => this.onRestorePassword()}>
+                        onPress={() => restorePassword({ navigation })}>
                         <Text style={styles.link}>Forgot Password?</Text>
                     </TouchableHighlight>
                     <TouchableHighlight
                         style={styles.signInButton}
                         underlayColor={BaseStyles.colors.lightBlue}
                         hitSlop={BaseStyles.buttonHitSlop}
-                        onPress={() => this.onSignIn()}>
+                        onPress={() =>
+                            requestSignIn(dispatch, {
+                                email,
+                                password,
+                                userName,
+                            })
+                        }>
                         <Text style={styles.signInText}>Sign in</Text>
                     </TouchableHighlight>
                     <TouchableHighlight
                         underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
                         hitSlop={BaseStyles.buttonHitSlop}
                         style={styles.signUp}
-                        onPress={() => this.onSignUp()}>
+                        onPress={() => goToSignUp(navigation)}>
                         <Text style={styles.link}>New Here? Sign Up?</Text>
                     </TouchableHighlight>
                 </KeyboardAvoidingView>
             </LinearGradient>
-        );
-    }
-}
+        </ScrollView>
+    );
+};
 
 export default SignIn;

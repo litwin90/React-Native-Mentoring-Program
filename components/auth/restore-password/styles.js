@@ -6,17 +6,25 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    backIcon: {
+        width: BaseStyles.fontSize.xl,
+        height: BaseStyles.fontSize.xl,
+        marginLeft: BaseStyles.margin.l,
+        marginTop: BaseStyles.margin.l,
+    },
     title: {
         backgroundColor: 'transparent',
         fontSize: BaseStyles.fontSize.xl,
         textAlign: 'center',
         margin: BaseStyles.margin.l,
         color: BaseStyles.colors.lightBlue,
-        marginTop: 260,
+        marginTop: 200,
     },
-    inputGroup: {
-        flex: 1,
-        alignItems: 'center',
+    description: {
+        ...BaseStylesSets.containerRightLeftMargins,
+        color: BaseStyles.colors.black,
+        textAlign: 'center',
+        fontSize: BaseStyles.fontSize.s,
     },
     input: {
         ...BaseStylesSets.containerRightLeftMargins,
@@ -25,32 +33,19 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         color: BaseStyles.colors.black,
         fontSize: BaseStyles.fontSize.m,
-        marginTop: 20,
+        marginTop: 100,
     },
-    restorePassword: {
-        ...BaseStylesSets.containerRightLeftMargins,
-        alignSelf: 'flex-end',
-        marginTop: 20,
-    },
-    link: {
-        ...BaseStylesSets.baseLink,
-    },
-    signUp: {
-        ...BaseStylesSets.containerRightLeftMargins,
-        alignSelf: 'center',
-        marginBottom: BaseStyles.margin.l,
-    },
-    signInButton: {
-        alignSelf: 'stretch',
-        backgroundColor: BaseStyles.colors.blue,
-        padding: BaseStyles.padding.m,
-        margin: BaseStyles.margin.l,
-    },
-    signInText: {
+    restoreText: {
         textAlign: 'center',
         color: BaseStyles.colors.white,
         textTransform: 'uppercase',
         fontSize: BaseStyles.fontSize.m,
+    },
+    restoreButton: {
+        alignSelf: 'stretch',
+        backgroundColor: BaseStyles.colors.blue,
+        padding: BaseStyles.padding.m,
+        margin: BaseStyles.margin.l,
     },
 });
 

@@ -14,16 +14,8 @@ const styles = StyleSheet.create({
     title: {
         fontSize: BaseStyles.fontSize.m,
         color: BaseStyles.colors.white,
-    },
-    menuButton: {
-        display: 'flex',
-        width: BaseStyles.fontSize.l,
-        height: BaseStyles.fontSize.l,
-    },
-    rightIconGroup: {
-        flexBasis: 70,
-        justifyContent: 'space-between',
-        flexDirection: 'row',
+        paddingLeft: BaseStyles.padding.l,
+        flexBasis: 300,
     },
 });
 

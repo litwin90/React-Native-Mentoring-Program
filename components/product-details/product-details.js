@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
+import { XmlEntities } from 'html-entities';
+import htmlToText from 'html-to-text';
 
 import Header from '../common/header/header';
 import Divider from '../common/divider/divider';
 import Product from '../common/product/product';
-import ColorSelect from './color-select/color-select';
 import ProductDescription from './description/description';
+
+const entities = new XmlEntities();
 
 class ProductDetails extends Component {
     getPriceString(item) {
@@ -23,24 +26,42 @@ class ProductDetails extends Component {
     addToWishList() {}
 
     addToCart() {}
+
+    goBack() {
+        this.props.navigation.goBack();
+    }
+
+    getTitle() {
+        return this.props.route.params.product.cell.name;
+    }
+
     render() {
         return (
-            <ScrollView>
-                <Header />
-                <Product item={this.props.item} isExtended={true} />
-                <Divider />
-                <ColorSelect colors={this.props.item.colors} />
-                <Divider />
-                <ProductDescription
-                    description={this.props.item.description}
-                    wishList={() => {
-                        this.addToWishList();
-                    }}
-                    addToCart={() => {
-                        this.addToCart();
+            <>
+                <Header
+                    title={this.getTitle()}
+                    goBack={() => {
+                        this.goBack();
                     }}
                 />
-            </ScrollView>
+
+                <ScrollView>
+                    <Product item={this.props.route.params.product} isExtended={true} />
+                    <Divider />
+                    <Divider />
+                    <ProductDescription
+                        description={htmlToText.fromString(
+                            entities.decode(this.props.route.params.product.cell.description),
+                        )}
+                        wishList={() => {
+                            this.addToWishList();
+                        }}
+                        addToCart={() => {
+                            this.addToCart();
+                        }}
+                    />
+                </ScrollView>
+            </>
         );
     }
 }

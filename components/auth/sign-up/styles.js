@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         margin: BaseStyles.margin.l,
         color: BaseStyles.colors.lightBlue,
-        marginTop: 120,
+        marginTop: 100,
     },
     inputGroup: {
         flex: 1,
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     signIn: {
         ...BaseStylesSets.containerRightLeftMargins,
         alignSelf: 'center',
+        marginBottom: BaseStyles.margin.l,
     },
     signInButton: {
         alignSelf: 'stretch',
