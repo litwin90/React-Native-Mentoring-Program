@@ -2,9 +2,10 @@ import React from 'react';
 import { View, Animated, Easing } from 'react-native';
 
 import styles from './styles';
+import { BaseStyles } from '../../../app.styles';
 
-const animationDuration = 300;
-const animationDelay = 150;
+const animationDuration = 150;
+const animationDelay = 100;
 const startTranslateY = 0;
 const endTranslateY = -10;
 
@@ -47,7 +48,7 @@ const getPointsAnimatedValues = pointsCount => {
 let pointsAnimatedValues = [];
 let animatedPoints = [];
 
-const LoadingIndicator = ({ pointsCount = 4 }) => {
+const LoadingIndicator = ({ pointsCount = 4, color = BaseStyles.colors.white }) => {
     pointsAnimatedValues = getPointsAnimatedValues(pointsCount);
     animatedPoints = pointsAnimatedValues.map((pointTranslateY, index) => (
         <Animated.View
@@ -55,6 +56,7 @@ const LoadingIndicator = ({ pointsCount = 4 }) => {
             style={[
                 styles.point,
                 {
+                    backgroundColor: color,
                     transform: [
                         {
                             translateY: pointTranslateY,

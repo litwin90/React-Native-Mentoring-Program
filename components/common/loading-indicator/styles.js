@@ -3,7 +3,11 @@ import { BaseStyles } from '../../../app.styles';
 
 const styles = StyleSheet.create({
     wrapper: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
         flexDirection: 'row',
+        minHeight: 40,
     },
     point: {
         width: 7,
