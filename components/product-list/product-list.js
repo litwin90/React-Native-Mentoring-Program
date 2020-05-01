@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { RefreshControl, FlatList, View, Image, ActivityIndicator, Text, TouchableHighlight } from 'react-native';
+import { RefreshControl, FlatList, View, Image, Text, TouchableHighlight } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { XmlEntities } from 'html-entities';
 
@@ -10,6 +10,7 @@ import { BaseStyles } from '../../app.styles';
 
 import styles from './styles';
 import { MAIN_ROUTES } from '../app-navigation/routes';
+import LoadingIndicator from '../common/loading-indicator/loading-indicator';
 
 const entities = new XmlEntities();
 
@@ -83,7 +84,7 @@ const ProductList = ({ route, navigation }) => {
                 />
             ) : null}
             {isLoading ? (
-                <ActivityIndicator size="large" color={BaseStyles.colors.lightBlue} style={styles.spinner} />
+                <LoadingIndicator color={BaseStyles.colors.lightBlue} />
             ) : error ? (
                 <Warning error={error} />
             ) : null}

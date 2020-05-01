@@ -9,6 +9,7 @@ import FormWarning from '../form-warning/form-warning';
 import { AuthActions, fetchSignIn } from '../auth.slice';
 import { isEmail } from '../utils';
 import { AUTH_ROUTES } from '../../app-navigation/routes';
+import ButtonWithLoading from '../../common/button-with-loading/button-with-loading';
 
 function onChangeEmailField(dispatch, text) {
     if (isEmail(text)) {
@@ -38,11 +39,11 @@ const SignIn = ({ navigation }) => {
     const dispatch = useDispatch();
 
     const { email, password, userName } = useSelector(state => state.auth.signInForm);
-    const { signInError } = useSelector(state => state.auth);
+    const { signInError, isLoading } = useSelector(state => state.auth);
 
     return (
-        <ScrollView>
-            <LinearGradient colors={BackgroundGradientColors} style={styles.container}>
+        <LinearGradient colors={BackgroundGradientColors} style={styles.container}>
+            <ScrollView>
                 <KeyboardAvoidingView behavior="position" style={styles.container}>
                     <Text style={styles.title}>Ecommerce Store</Text>
                     <TextInput
@@ -68,7 +69,7 @@ const SignIn = ({ navigation }) => {
                         secureTextEntry={true}
                         textContentType="password"
                     />
-                    {signInError ? <FormWarning error={signInError} /> : null}
+                    <FormWarning error={signInError} />
                     <TouchableHighlight
                         underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
                         hitSlop={BaseStyles.buttonHitSlop}
@@ -76,19 +77,19 @@ const SignIn = ({ navigation }) => {
                         onPress={() => restorePassword({ navigation })}>
                         <Text style={styles.link}>Forgot Password?</Text>
                     </TouchableHighlight>
-                    <TouchableHighlight
-                        style={styles.signInButton}
-                        underlayColor={BaseStyles.colors.lightBlue}
-                        hitSlop={BaseStyles.buttonHitSlop}
-                        onPress={() =>
+                    <ButtonWithLoading
+                        isLoading={isLoading}
+                        onPress={() => {
                             requestSignIn(dispatch, {
                                 email,
                                 password,
                                 userName,
-                            })
-                        }>
-                        <Text style={styles.signInText}>Sign in</Text>
-                    </TouchableHighlight>
+                            });
+                        }}
+                        isError={signInError}
+                        defaultLabel="Sign In"
+                        errorLabel="Try Again"
+                    />
                     <TouchableHighlight
                         underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
                         hitSlop={BaseStyles.buttonHitSlop}
@@ -97,8 +98,8 @@ const SignIn = ({ navigation }) => {
                         <Text style={styles.link}>New Here? Sign Up?</Text>
                     </TouchableHighlight>
                 </KeyboardAvoidingView>
-            </LinearGradient>
-        </ScrollView>
+            </ScrollView>
+        </LinearGradient>
     );
 };
 
