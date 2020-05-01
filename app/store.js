@@ -5,5 +5,10 @@ import LogStateMiddleware from './logStateMiddleware';
 
 export const appStore = configureStore({
     reducer: rootReducer,
-    middleware: [...getDefaultMiddleware(), LogStateMiddleware],
+    middleware: [
+        ...getDefaultMiddleware({
+            serializableCheck: false,
+        }),
+        LogStateMiddleware,
+    ],
 });
