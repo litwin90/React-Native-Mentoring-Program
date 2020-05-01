@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Text, TextInput, TouchableHighlight, KeyboardAvoidingView, ScrollView, LayoutAnimation } from 'react-native';
+import React from 'react';
+import { Text, TextInput, TouchableHighlight, KeyboardAvoidingView, ScrollView } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,7 +9,7 @@ import FormWarning from '../form-warning/form-warning';
 import { AuthActions, fetchSignIn } from '../auth.slice';
 import { isEmail } from '../utils';
 import { AUTH_ROUTES } from '../../app-navigation/routes';
-import LoadingIndicator from '../../common/loading-indicator/loading-indicator';
+import ButtonWithLoading from '../../common/button-with-loading/button-with-loading';
 
 function onChangeEmailField(dispatch, text) {
     if (isEmail(text)) {
@@ -40,10 +40,6 @@ const SignIn = ({ navigation }) => {
 
     const { email, password, userName } = useSelector(state => state.auth.signInForm);
     const { signInError, isLoading } = useSelector(state => state.auth);
-
-    useEffect(() => {
-        LayoutAnimation.easeInEaseOut();
-    });
 
     return (
         <LinearGradient colors={BackgroundGradientColors} style={styles.container}>
@@ -81,26 +77,19 @@ const SignIn = ({ navigation }) => {
                         onPress={() => restorePassword({ navigation })}>
                         <Text style={styles.link}>Forgot Password?</Text>
                     </TouchableHighlight>
-                    <TouchableHighlight
-                        style={isLoading ? styles.signInButtonCollapsed : styles.signInButton}
-                        underlayColor={BaseStyles.colors.lightBlue}
-                        hitSlop={BaseStyles.buttonHitSlop}
+                    <ButtonWithLoading
+                        isLoading={isLoading}
                         onPress={() => {
-                            if (!isLoading) {
-                                LayoutAnimation.easeInEaseOut();
-                                requestSignIn(dispatch, {
-                                    email,
-                                    password,
-                                    userName,
-                                });
-                            }
-                        }}>
-                        {isLoading ? (
-                            <LoadingIndicator />
-                        ) : (
-                            <Text style={styles.signInText}>{signInError ? 'Try Again' : 'Sign In'}</Text>
-                        )}
-                    </TouchableHighlight>
+                            requestSignIn(dispatch, {
+                                email,
+                                password,
+                                userName,
+                            });
+                        }}
+                        isError={signInError}
+                        defaultLabel="Sign In"
+                        errorLabel="Try Again"
+                    />
                     <TouchableHighlight
                         underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
                         hitSlop={BaseStyles.buttonHitSlop}
