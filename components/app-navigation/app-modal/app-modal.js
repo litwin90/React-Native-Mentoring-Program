@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { View, Text, Modal, TouchableOpacity } from 'react-native';
+import { View, Text, Modal, TouchableOpacity, Vibration } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 import styles from './styles';
@@ -31,6 +31,11 @@ const getButtons = buttonsConfigs => {
 
 const AppModal = () => {
     const { isVisible, faIcon, message, buttons } = useSelector(state => state.appModal);
+    useEffect(() => {
+        if (isVisible) {
+            Vibration.vibrate();
+        }
+    }, [isVisible]);
     return isVisible ? (
         <Modal animationType="slide" transparent={true} visible={isVisible}>
             <View style={styles.transparentWrapper}>
