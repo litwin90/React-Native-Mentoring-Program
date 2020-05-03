@@ -39,10 +39,6 @@ const AppNavigation = () => {
             }
         });
 
-        // setTimeout(() => {
-        //     showConnectionWarning(dispatch);
-        // }, 2000);
-
         AppStorage.getStoredUserData().then(([userName, email, password, token]) => {
             if (token) {
                 dispatch(

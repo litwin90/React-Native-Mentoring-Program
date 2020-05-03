@@ -1,61 +1,56 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
 
-import styles, { ExtendedStyles } from './styles';
+import styles from './styles';
 
-class Product extends Component {
-    constructor(props) {
-        super(props);
+const getPriceString = item => {
+    return `$${item.price}`;
+};
 
-        this.styles = this.props.isExtended ? ExtendedStyles : styles;
+// function getOldPriceString(item) {
+//     return `$${item.oldPrice}`;
+// }
+
+// function getDiscountString(item) {
+//     return `${item.discount}% Off`;
+// }
+
+const getStockButton = isExtended =>
+    isExtended ? (
+        <TouchableOpacity
+            onPress={() => {
+                this.stock();
+            }}>
+            <View style={isExtended ? styles.stockWrapperExpanded : styles.stockWrapper}>
+                <Text style={isExtended ? styles.stockExpanded : styles.stock}>In Stock</Text>
+            </View>
+        </TouchableOpacity>
+    ) : null;
+
+const Product = ({ isExtended, item, gotoProductDetails }) => {
+    if (item.isEmpty) {
+        return <View style={styles.emptyItem} />;
     }
-
-    getPriceString(item) {
-        return `$${item.price}`;
-    }
-
-    getOldPriceString(item) {
-        return `$${item.oldPrice}`;
-    }
-
-    getDiscountString(item) {
-        return `${item.discount}% Off`;
-    }
-
-    getStockButtonGSX() {
-        return this.props.isExtended ? (
-            <TouchableOpacity
-                onPress={() => {
-                    this.stock();
-                }}>
-                <View style={this.styles.stockWrapper}>
-                    <Text style={this.styles.stock}>In Stock</Text>
-                </View>
-            </TouchableOpacity>
-        ) : null;
-    }
-
-    stock() {}
-
-    render() {
-        return (
-            <TouchableOpacity
-                style={this.styles.wrapper}
-                onPress={() => (this.props.isExtended ? null : this.props.gotoProductDetails(this.props.item))}>
-                <View style={this.styles.imageWrapper}>
-                    <Image source={{ uri: `http:${this.props.item.cell.thumb}` }} style={this.styles.image} />
-                </View>
-                {this.getStockButtonGSX()}
-                {/* {this.getControlsGSX()} */}
-                <Text style={this.styles.name}>{this.props.item.cell.name}</Text>
-                <View style={this.styles.priceWrapper}>
-                    <Text style={this.styles.price}>{this.getPriceString(this.props.item.cell)}</Text>
-                    {/* <Text style={this.styles.oldPrice}>{this.getOldPriceString(this.props.item.cell)}</Text> */}
-                    {/* <Text style={this.styles.discount}>{this.getDiscountString(this.props.item.cell)}</Text> */}
-                </View>
-            </TouchableOpacity>
-        );
-    }
-}
+    return (
+        <TouchableOpacity
+            style={isExtended ? styles.wrapperExpanded : styles.wrapper}
+            onPress={() => (isExtended ? null : gotoProductDetails(item))}>
+            <View style={isExtended ? styles.imageWrapperExpanded : styles.imageWrapper}>
+                <Image
+                    source={{ uri: `http:${item.cell.thumb}` }}
+                    style={isExtended ? styles.imageExpanded : styles.image}
+                />
+            </View>
+            {getStockButton(isExtended)}
+            {/* {this.getControlsGSX()} */}
+            <Text style={isExtended ? styles.nameExpanded : styles.name}>{item.cell.name}</Text>
+            <View style={isExtended ? styles.priceWrapperExpanded : styles.priceWrapper}>
+                <Text style={isExtended ? styles.priceExpanded : styles.price}>{getPriceString(item.cell)}</Text>
+                {/* <Text style={this.styles.oldPrice}>{this.getOldPriceString(this.props.item.cell)}</Text> */}
+                {/* <Text style={this.styles.discount}>{this.getDiscountString(this.props.item.cell)}</Text> */}
+            </View>
+        </TouchableOpacity>
+    );
+};
 
 export default Product;

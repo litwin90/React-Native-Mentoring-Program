@@ -4,15 +4,14 @@ import { BaseStyles } from '../../../app.styles';
 
 const styles = StyleSheet.create({
     signInButton: {
-        width: 350,
+        flex: 1,
+        alignSelf: 'stretch',
         backgroundColor: BaseStyles.colors.blue,
         padding: BaseStyles.padding.m,
         margin: BaseStyles.margin.l,
         height: 40,
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: 'auto',
-        marginRight: 'auto',
     },
     signInButtonCollapsed: {
         width: 100,

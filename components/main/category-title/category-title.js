@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableHighlight, View, Text, Image } from 'react-native';
+import { TouchableOpacity, View, Text, Image } from 'react-native';
 import { XmlEntities } from 'html-entities';
 
 import styles from './styles';
@@ -9,7 +9,7 @@ const entities = new XmlEntities();
 
 const CategoryTitle = ({ category, openCategoryProductList }) => {
     return (
-        <TouchableHighlight
+        <TouchableOpacity
             hitSlop={BaseStyles.buttonHitSlop}
             onPress={() => {
                 openCategoryProductList(category);
@@ -20,7 +20,7 @@ const CategoryTitle = ({ category, openCategoryProductList }) => {
                 </View>
                 <Text style={BaseStyles.groupName}>{entities.decode(category.name)}</Text>
             </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
     );
 };
 

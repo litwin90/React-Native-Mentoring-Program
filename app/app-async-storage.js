@@ -7,6 +7,8 @@ const ASYNC_STORAGE_KEYS = {
     TOKEN: 'e-store-user-token',
 };
 
+const EMPTY_VALUE = 'Empty';
+
 class AppAsyncStorage {
     getStoredUserData() {
         return Promise.all([
@@ -18,10 +20,10 @@ class AppAsyncStorage {
     }
 
     setUserDataToAsyncStorage({ userName, email, password, token }) {
-        AsyncStorage.setItem(ASYNC_STORAGE_KEYS.USER_NAME, userName);
-        AsyncStorage.setItem(ASYNC_STORAGE_KEYS.EMAIL, email);
-        AsyncStorage.setItem(ASYNC_STORAGE_KEYS.PASSWORD, password);
-        AsyncStorage.setItem(ASYNC_STORAGE_KEYS.TOKEN, token);
+        AsyncStorage.setItem(ASYNC_STORAGE_KEYS.USER_NAME, userName || EMPTY_VALUE);
+        AsyncStorage.setItem(ASYNC_STORAGE_KEYS.EMAIL, email || EMPTY_VALUE);
+        AsyncStorage.setItem(ASYNC_STORAGE_KEYS.PASSWORD, password || EMPTY_VALUE);
+        AsyncStorage.setItem(ASYNC_STORAGE_KEYS.TOKEN, token || EMPTY_VALUE);
     }
 }
 
