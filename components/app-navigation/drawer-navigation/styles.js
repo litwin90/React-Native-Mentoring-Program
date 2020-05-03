@@ -27,8 +27,9 @@ const styles = StyleSheet.create({
         marginLeft: -5,
     },
     itemIcon: {
-        paddingRight: 0,
         marginRight: -15,
+        flexBasis: 30,
+        textAlign: 'center',
     },
     itemLabel: {
         paddingLeft: 0,

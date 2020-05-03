@@ -1,16 +1,7 @@
 import React from 'react';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { View, Text } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import {
-    faUser,
-    faHeart,
-    faShoppingCart,
-    faCartArrowDown,
-    faEnvelope,
-    faPhoneAlt,
-    faShareAlt,
-} from '@fortawesome/free-solid-svg-icons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { MAIN_ROUTES } from '../routes';
 
@@ -19,6 +10,7 @@ import Main from '../../main/main';
 import FakeText from '../fake-component';
 import styles from './styles';
 import { BaseStyles } from '../../../app.styles';
+import { ICON_NAMES } from '../../../app/app-constants';
 
 const Drawer = createDrawerNavigator();
 
@@ -37,9 +29,9 @@ function CustomDrawerContent({ navigation }) {
                     labelStyle={styles.itemLabel}
                     style={styles.item}
                     icon={() => (
-                        <FontAwesomeIcon
+                        <Icon
+                            name={ICON_NAMES.USER}
                             style={styles.itemIcon}
-                            icon={faUser}
                             size={BaseStyles.fontSize.l}
                             color={BaseStyles.colors.blue}
                         />
@@ -51,9 +43,9 @@ function CustomDrawerContent({ navigation }) {
                     labelStyle={styles.itemLabel}
                     style={styles.item}
                     icon={() => (
-                        <FontAwesomeIcon
+                        <Icon
+                            name={ICON_NAMES.HEART}
                             style={styles.itemIcon}
-                            icon={faHeart}
                             size={BaseStyles.fontSize.l}
                             color={BaseStyles.colors.blue}
                         />
@@ -65,9 +57,9 @@ function CustomDrawerContent({ navigation }) {
                     labelStyle={styles.itemLabel}
                     style={styles.item}
                     icon={() => (
-                        <FontAwesomeIcon
+                        <Icon
+                            name={ICON_NAMES.CART}
                             style={styles.itemIcon}
-                            icon={faShoppingCart}
                             size={BaseStyles.fontSize.l}
                             color={BaseStyles.colors.blue}
                         />
@@ -79,9 +71,9 @@ function CustomDrawerContent({ navigation }) {
                     labelStyle={styles.itemLabel}
                     style={styles.item}
                     icon={() => (
-                        <FontAwesomeIcon
+                        <Icon
+                            name={ICON_NAMES.CART_ARROW_DOWN}
                             style={styles.itemIcon}
-                            icon={faCartArrowDown}
                             size={BaseStyles.fontSize.l}
                             color={BaseStyles.colors.blue}
                         />
@@ -99,9 +91,9 @@ function CustomDrawerContent({ navigation }) {
                     labelStyle={styles.itemLabel}
                     style={styles.item}
                     icon={() => (
-                        <FontAwesomeIcon
+                        <Icon
+                            name={ICON_NAMES.EMAIL}
                             style={styles.itemIcon}
-                            icon={faEnvelope}
                             size={BaseStyles.fontSize.l}
                             color={BaseStyles.colors.blue}
                         />
@@ -113,9 +105,9 @@ function CustomDrawerContent({ navigation }) {
                     labelStyle={styles.itemLabel}
                     style={styles.item}
                     icon={() => (
-                        <FontAwesomeIcon
+                        <Icon
+                            name={ICON_NAMES.PHONE}
                             style={styles.itemIcon}
-                            icon={faPhoneAlt}
                             size={BaseStyles.fontSize.l}
                             color={BaseStyles.colors.blue}
                         />
@@ -133,9 +125,9 @@ function CustomDrawerContent({ navigation }) {
                     labelStyle={styles.itemLabel}
                     style={styles.item}
                     icon={() => (
-                        <FontAwesomeIcon
+                        <Icon
+                            name={ICON_NAMES.SHARE}
                             style={styles.itemIcon}
-                            icon={faShareAlt}
                             size={BaseStyles.fontSize.l}
                             color={BaseStyles.colors.blue}
                         />

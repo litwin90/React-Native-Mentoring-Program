@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import NetInfo from '@react-native-community/netinfo';
-import { faSkullCrossbones } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ProductDetails from '../product-details/product-details';
@@ -21,7 +20,7 @@ const Stack = createStackNavigator();
 const showConnectionWarning = dispatch => {
     dispatch(
         AppModalActions.showModal({
-            icon: faSkullCrossbones,
+            iconName: 'warning',
             message: 'There are no living internet connection',
             buttons: [getHideModalButtonConfig({ dispatch, label: 'Ok' })],
         }),
