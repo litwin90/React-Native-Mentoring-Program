@@ -13,6 +13,7 @@ export const MAIN_ROUTES = {
 };
 
 export const AUTH_ROUTES = {
+    WELCOME_PAGE: 'Welcome',
     SING_IN: 'SignIn',
     SIGN_OUT: 'SignOut',
     RESTORE_PASSWORD: 'RestorePassword',

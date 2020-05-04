@@ -13,7 +13,7 @@ import ProductList from '../product-list/product-list';
 import AppModal, { getHideModalButtonConfig } from './app-modal/app-modal';
 import { AppModalActions } from './app-modal/app-modal.slice';
 import { AppStorage } from '../../app/app-async-storage';
-import { AuthActions } from '../auth/auth.slice';
+import { setUserDataIfTokenAlive } from '../auth/auth.slice';
 
 const Stack = createStackNavigator();
 
@@ -40,14 +40,7 @@ const AppNavigation = () => {
 
         AppStorage.getStoredUserData().then(([userName, email, password, token]) => {
             if (token) {
-                dispatch(
-                    AuthActions.setUserData({
-                        userName,
-                        email,
-                        password,
-                        token,
-                    }),
-                );
+                dispatch(setUserDataIfTokenAlive({ userName, email, password, token }));
             }
         });
 
