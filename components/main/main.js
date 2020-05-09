@@ -45,6 +45,8 @@ const Main = ({ navigation }) => {
         }
     }, [isLoading, error, categories, dispatch]);
 
+    const goToCart = () => navigation.navigate(MAIN_ROUTES.MY_CART.name, { title: MAIN_ROUTES.MY_CART.title });
+
     return (
         <View style={styles.wrapper}>
             <Header
@@ -53,6 +55,7 @@ const Main = ({ navigation }) => {
                 openMenu={() => {
                     openMenu(navigation);
                 }}
+                goToCart={goToCart}
             />
             {isLoading ? (
                 <ActivityIndicator size="large" color={BaseStyles.colors.lightBlue} style={styles.spinner} />

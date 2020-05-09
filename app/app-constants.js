@@ -9,4 +9,6 @@ export const ICON_NAMES = {
     EMAIL: 'envelope',
     PHONE: 'phone',
     SHARE: 'share-alt',
+    TRASH: 'trash',
+    SHIELD: 'shield',
 };

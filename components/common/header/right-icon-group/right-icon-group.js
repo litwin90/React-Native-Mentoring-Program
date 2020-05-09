@@ -8,7 +8,7 @@ import { BaseStyles } from '../../../../app.styles';
 import styles from './styles';
 import { ICON_NAMES } from '../../../../app/app-constants';
 
-const RightIconGroup = ({ toggleSearch, isSearchVisible }) => (
+const RightIconGroup = ({ toggleSearch, isSearchVisible, goToCart }) => (
     <View style={styles.wrapper}>
         <TouchableHighlight
             underlayColor={BaseStyles.colors.transparent}
@@ -20,7 +20,7 @@ const RightIconGroup = ({ toggleSearch, isSearchVisible }) => (
             hitSlop={BaseStyles.buttonHitSlop}
             underlayColor={BaseStyles.colors.LinkHighlighUnderlay}
             onPress={() => {
-                console.log('open wishlist');
+                goToCart();
             }}>
             <Icon name={ICON_NAMES.CART} size={BaseStyles.fontSize.l} color={BaseStyles.colors.white} />
         </TouchableHighlight>

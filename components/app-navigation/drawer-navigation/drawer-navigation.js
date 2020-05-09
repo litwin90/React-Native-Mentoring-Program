@@ -11,6 +11,7 @@ import FakeText from '../fake-component';
 import styles from './styles';
 import { BaseStyles } from '../../../app.styles';
 import { ICON_NAMES } from '../../../app/app-constants';
+import Cart from '../../cart/cart';
 
 const Drawer = createDrawerNavigator();
 
@@ -64,7 +65,7 @@ function CustomDrawerContent({ navigation }) {
                             color={BaseStyles.colors.blue}
                         />
                     )}
-                    onPress={() => navigation.navigate(MAIN_ROUTES.MY_CART.name)}
+                    onPress={() => navigation.navigate(MAIN_ROUTES.MY_CART.name, { title: MAIN_ROUTES.MY_CART.title })}
                 />
                 <DrawerItem
                     label={MAIN_ROUTES.MY_ORDERS.title}
@@ -148,8 +149,7 @@ const MainDrawer = () => (
             options={{ title: MAIN_ROUTES.PROFILE.title }}
         />
         <Drawer.Screen name={MAIN_ROUTES.WISH_LIST.name} component={FakeText} />
-        <Drawer.Screen name={MAIN_ROUTES.MY_CART.name} component={FakeText} />
-        <Drawer.Screen name={MAIN_ROUTES.MY_ORDERS.name} component={FakeText} />
+        <Drawer.Screen name={MAIN_ROUTES.MY_CART.name} component={Cart} />
     </Drawer.Navigator>
 );
 
