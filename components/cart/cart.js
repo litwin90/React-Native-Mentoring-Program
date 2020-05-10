@@ -89,7 +89,7 @@ const Cart = ({ navigation, route }) => {
     const goBack = () => navigation.goBack();
     const goToCart = () => navigation.navigate(MAIN_ROUTES.MY_CART.name, { title: MAIN_ROUTES.MY_CART.title });
     const { isLoading, products, error, totals } = useSelector(store => store.cart);
-    const total = totals.find(item => item.id === 'total');
+    const total = totals.find ? totals.find(item => item.id === 'total') : { text: '0' };
     const totalCost = total ? total.text : '0';
     return (
         <>

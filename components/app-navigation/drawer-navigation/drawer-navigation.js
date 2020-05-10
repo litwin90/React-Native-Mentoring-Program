@@ -13,6 +13,7 @@ import { BaseStyles } from '../../../app.styles';
 import { ICON_NAMES } from '../../../app/app-constants';
 import Orders from '../../orders/orders';
 import Cart from '../../cart/cart';
+import { shareService } from '../../../app/services/share';
 
 const Drawer = createDrawerNavigator();
 
@@ -136,7 +137,13 @@ function CustomDrawerContent({ navigation }) {
                             color={BaseStyles.colors.blue}
                         />
                     )}
-                    onPress={() => navigation.navigate(MAIN_ROUTES.SHARE.name)}
+                    onPress={() => {
+                        shareService.share({
+                            url: 'http://34.73.95.65/',
+                            title: 'ECommerce Store',
+                            message: 'You could buy there anything',
+                        });
+                    }}
                 />
             </View>
         </DrawerContentScrollView>
