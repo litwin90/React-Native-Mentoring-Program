@@ -23,9 +23,9 @@ export const BaseStyles = {
     },
     buttonHitSlop: {
         top: 30,
-        left: 10,
+        left: 20,
         bottom: 30,
-        right: 10,
+        right: 50,
     },
 };
 

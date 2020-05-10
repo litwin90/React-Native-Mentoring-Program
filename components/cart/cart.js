@@ -99,7 +99,7 @@ const Cart = ({ navigation, route }) => {
                 <FlatList
                     data={products}
                     renderItem={product => renderProduct({ product, navigation })}
-                    keyExtractor={product => product.id}
+                    keyExtractor={product => product.key}
                     style={styles.wrapper}
                     ListFooterComponent={renderProductsFooter(products, totalCost, isLoading, error)}
                     refreshing={isLoading}

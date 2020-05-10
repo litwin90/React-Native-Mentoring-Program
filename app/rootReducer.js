@@ -6,6 +6,7 @@ import mainReducer from '../components/main/main.slice';
 import productListReducer from '../components/product-list/product-list.slice';
 import appModalReducer from '../components/app-navigation/app-modal/app-modal.slice';
 import cartReducer from '../components/cart/cart.slice';
+import ordersReducer from '../components/orders/orders.slice';
 
 const rootReducer = combineReducers({
     header: headerReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     productList: productListReducer,
     appModal: appModalReducer,
     cart: cartReducer,
+    orders: ordersReducer,
 });
 
 export default rootReducer;
