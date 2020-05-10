@@ -14,6 +14,7 @@ import AppModal, { getHideModalButtonConfig } from './app-modal/app-modal';
 import { AppModalActions } from './app-modal/app-modal.slice';
 import { AppStorage } from '../../app/app-async-storage';
 import { setUserDataIfTokenAlive } from '../auth/auth.slice';
+import Map from '../map/map';
 
 const Stack = createStackNavigator();
 
@@ -76,6 +77,13 @@ const AppNavigation = () => {
                             <Stack.Screen
                                 name={MAIN_ROUTES.PRODUCT_LIST.name}
                                 component={ProductList}
+                                options={{
+                                    header: () => null,
+                                }}
+                            />
+                            <Stack.Screen
+                                name={MAIN_ROUTES.MAP.name}
+                                component={Map}
                                 options={{
                                     header: () => null,
                                 }}
