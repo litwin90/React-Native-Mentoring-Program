@@ -5,7 +5,7 @@ export const BaseStyles = {
         m: 20,
         l: 30,
     },
-    padding: { m: 8, s: 4, l: 12, xs: 2, xl: 18 },
+    padding: { m: 8, s: 4, l: 12, xs: 2, xl: 18, xxxl: 36 },
     fontSize: { xxl: 45, xl: 32, l: 24, m: 18, s: 16, xs: 12 },
     colors: {
         white: '#ffffff',
@@ -23,9 +23,9 @@ export const BaseStyles = {
     },
     buttonHitSlop: {
         top: 30,
-        left: 10,
+        left: 20,
         bottom: 30,
-        right: 10,
+        right: 50,
     },
 };
 

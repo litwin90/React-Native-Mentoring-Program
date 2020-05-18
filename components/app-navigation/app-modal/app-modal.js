@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { View, Text, Modal, TouchableOpacity, Vibration } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import styles from './styles';
 import { BaseStyles } from '../../../app.styles';
@@ -30,7 +30,7 @@ const getButtons = buttonsConfigs => {
 };
 
 const AppModal = () => {
-    const { isVisible, faIcon, message, buttons } = useSelector(state => state.appModal);
+    const { isVisible, iconName, message, buttons } = useSelector(state => state.appModal);
     useEffect(() => {
         if (isVisible) {
             Vibration.vibrate();
@@ -40,8 +40,8 @@ const AppModal = () => {
         <Modal animationType="slide" transparent={true} visible={isVisible}>
             <View style={styles.transparentWrapper}>
                 <View style={styles.wrapper}>
-                    <FontAwesomeIcon
-                        icon={faIcon}
+                    <Icon
+                        name={iconName}
                         size={BaseStyles.fontSize.xxl}
                         color={BaseStyles.colors.warning}
                         style={styles.icon}

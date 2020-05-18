@@ -1,12 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { signIn, signOut, restorePassword } from '../../app/services/auth';
+import { signIn, signOut, restorePassword, checkTokenIsAlive } from '../../app/services/auth';
 import { AppStorage } from '../../app/app-async-storage';
 
 const initialState = {
     isSignedIn: false,
     isLoading: false,
     userToken: undefined,
+    isTokenChecked: false,
+    isTokenAlive: false,
     signInError: undefined,
     signOutError: undefined,
     signInForm: {
@@ -32,6 +34,20 @@ const authSlice = createSlice({
             store.signInForm.userName = action.payload.userName;
             store.signInForm.email = action.payload.email;
             store.signInForm.password = action.payload.password;
+        },
+        tokenIsAliveCheck(state) {
+            state.isLoading = true;
+        },
+        getSuccessTokenIsAliveCheck(state) {
+            state.isLoading = false;
+            state.isTokenAlive = true;
+            state.isTokenChecked = true;
+        },
+        getFailedTokenIsAliveCheck(state, action) {
+            state.isLoading = false;
+            state.isTokenAlive = false;
+            state.isTokenChecked = true;
+            state.error = action.payload.error;
         },
         signInRequest(state, action) {
             if (!state.isSignedIn) {
@@ -107,6 +123,30 @@ export const fetchSignIn = ({ email, userName, password }) => dispatch => {
         })
         .catch(error => {
             dispatch(AuthActions.getFailedSignIn({ error }));
+        });
+};
+
+export const setUserDataIfTokenAlive = ({ userName, email, password, token }) => dispatch => {
+    dispatch(AuthActions.tokenIsAliveCheck());
+
+    checkTokenIsAlive(token)
+        .then(({ status, request }) => {
+            if (status === 1) {
+                dispatch(AuthActions.getSuccessTokenIsAliveCheck());
+                dispatch(
+                    AuthActions.setUserData({
+                        userName,
+                        email,
+                        password,
+                        token,
+                    }),
+                );
+            } else {
+                dispatch(AuthActions.getFailedTokenIsAliveCheck({ error: request }));
+            }
+        })
+        .catch(error => {
+            dispatch(AuthActions.getFailedTokenIsAliveCheck({ error: error.message }));
         });
 };
 

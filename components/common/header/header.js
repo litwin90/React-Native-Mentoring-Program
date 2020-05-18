@@ -14,7 +14,7 @@ function toggleSearch(dispatch) {
     dispatch(HeaderActions.toggleSearch());
 }
 
-const Header = ({ title, needToShowMenuButton, goBack, openMenu }) => {
+const Header = ({ title, needToShowMenuButton, goBack, openMenu, goToCart }) => {
     const dispatch = useDispatch();
     const { isSearchVisible } = useSelector(state => state.header);
 
@@ -23,7 +23,11 @@ const Header = ({ title, needToShowMenuButton, goBack, openMenu }) => {
             <View style={styles.header}>
                 <LeftIconGroup goBack={goBack} needToShowMenuButton={needToShowMenuButton} openMenu={openMenu} />
                 <Text style={styles.title}>{title}</Text>
-                <RightIconGroup toggleSearch={() => toggleSearch(dispatch)} isSearchVisible={isSearchVisible} />
+                <RightIconGroup
+                    toggleSearch={() => toggleSearch(dispatch)}
+                    isSearchVisible={isSearchVisible}
+                    goToCart={goToCart}
+                />
             </View>
             <Search isSearchVisible={isSearchVisible} />
         </>

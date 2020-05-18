@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import NetInfo from '@react-native-community/netinfo';
-import { faSkullCrossbones } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ProductDetails from '../product-details/product-details';
@@ -14,14 +13,15 @@ import ProductList from '../product-list/product-list';
 import AppModal, { getHideModalButtonConfig } from './app-modal/app-modal';
 import { AppModalActions } from './app-modal/app-modal.slice';
 import { AppStorage } from '../../app/app-async-storage';
-import { AuthActions } from '../auth/auth.slice';
+import { setUserDataIfTokenAlive } from '../auth/auth.slice';
+import Map from '../map/map';
 
 const Stack = createStackNavigator();
 
 const showConnectionWarning = dispatch => {
     dispatch(
         AppModalActions.showModal({
-            icon: faSkullCrossbones,
+            iconName: 'warning',
             message: 'There are no living internet connection',
             buttons: [getHideModalButtonConfig({ dispatch, label: 'Ok' })],
         }),
@@ -41,14 +41,7 @@ const AppNavigation = () => {
 
         AppStorage.getStoredUserData().then(([userName, email, password, token]) => {
             if (token) {
-                dispatch(
-                    AuthActions.setUserData({
-                        userName,
-                        email,
-                        password,
-                        token,
-                    }),
-                );
+                dispatch(setUserDataIfTokenAlive({ userName, email, password, token }));
             }
         });
 
@@ -84,6 +77,13 @@ const AppNavigation = () => {
                             <Stack.Screen
                                 name={MAIN_ROUTES.PRODUCT_LIST.name}
                                 component={ProductList}
+                                options={{
+                                    header: () => null,
+                                }}
+                            />
+                            <Stack.Screen
+                                name={MAIN_ROUTES.MAP.name}
+                                component={Map}
                                 options={{
                                     header: () => null,
                                 }}

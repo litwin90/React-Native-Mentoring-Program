@@ -11,6 +11,7 @@ import Warning from '../auth/form-warning/form-warning';
 import { MAIN_ROUTES } from '../app-navigation/routes';
 import { fetchCategories } from './main.slice';
 import { BaseStyles } from '../../app.styles';
+import { FlatList } from 'react-native-gesture-handler';
 
 const openMenu = navigation => {
     navigation.openDrawer();
@@ -44,6 +45,8 @@ const Main = ({ navigation }) => {
         }
     }, [isLoading, error, categories, dispatch]);
 
+    const goToCart = () => navigation.navigate(MAIN_ROUTES.MY_CART.name, { title: MAIN_ROUTES.MY_CART.title });
+
     return (
         <View style={styles.wrapper}>
             <Header
@@ -52,6 +55,7 @@ const Main = ({ navigation }) => {
                 openMenu={() => {
                     openMenu(navigation);
                 }}
+                goToCart={goToCart}
             />
             {isLoading ? (
                 <ActivityIndicator size="large" color={BaseStyles.colors.lightBlue} style={styles.spinner} />
@@ -66,19 +70,24 @@ const Main = ({ navigation }) => {
                     </View>
                     <Divider />
                     <View style={styles.items}>
-                        {categories.map(category => {
-                            return (
-                                <CategoryPreview
-                                    category={category}
-                                    products={productsByCategoryId[category.category_id]}
-                                    gotoProductDetails={product => {
-                                        gotoProductDetails({ navigation, product });
-                                    }}
-                                    key={category.category_id}
-                                    openCategoryProductList={cat => openCategoryProductList(navigation, cat)}
-                                />
-                            );
-                        })}
+                        <FlatList
+                            data={categories}
+                            renderItem={category => {
+                                return (
+                                    <CategoryPreview
+                                        category={category.item}
+                                        products={productsByCategoryId[category.item.category_id]}
+                                        gotoProductDetails={product => {
+                                            gotoProductDetails({ navigation, product });
+                                        }}
+                                        openCategoryProductList={cat => openCategoryProductList(navigation, cat)}
+                                    />
+                                );
+                            }}
+                            keyExtractor={category => {
+                                return category.category_id;
+                            }}
+                        />
                     </View>
                 </>
             )}

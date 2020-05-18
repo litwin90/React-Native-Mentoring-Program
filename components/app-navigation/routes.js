@@ -10,9 +10,11 @@ export const MAIN_ROUTES = {
     CALL: { name: 'Call' },
     SHARE: { name: 'Share' },
     PRODUCT_LIST: { name: 'ProductList' },
+    MAP: { name: 'Map', title: 'Google Map' },
 };
 
 export const AUTH_ROUTES = {
+    WELCOME_PAGE: 'Welcome',
     SING_IN: 'SignIn',
     SIGN_OUT: 'SignOut',
     RESTORE_PASSWORD: 'RestorePassword',

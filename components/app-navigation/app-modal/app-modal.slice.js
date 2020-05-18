@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     isVisible: false,
-    faIcon: undefined,
+    iconName: undefined,
     message: undefined,
     buttons: undefined,
 };
@@ -13,7 +13,7 @@ const appModalSlice = createSlice({
     reducers: {
         showModal(state, action) {
             state.isVisible = true;
-            state.faIcon = action.payload.icon;
+            state.iconName = action.payload.iconName;
             state.message = action.payload.message;
             state.buttons = action.payload.buttons;
         },

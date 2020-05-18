@@ -53,6 +53,8 @@ const ProductList = ({ route, navigation }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const goToCart = () => navigation.navigate(MAIN_ROUTES.MY_CART.name, { title: MAIN_ROUTES.MY_CART.title });
+
     return (
         <>
             <Header
@@ -60,6 +62,7 @@ const ProductList = ({ route, navigation }) => {
                 goBack={() => {
                     navigation.goBack();
                 }}
+                goToCart={goToCart}
             />
             {!error ? (
                 <FlatList

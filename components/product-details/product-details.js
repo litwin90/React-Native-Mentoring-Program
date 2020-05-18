@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ScrollView } from 'react-native';
 import { XmlEntities } from 'html-entities';
 import htmlToText from 'html-to-text';
@@ -7,63 +7,58 @@ import Header from '../common/header/header';
 import Divider from '../common/divider/divider';
 import Product from '../common/product/product';
 import ProductDescription from './description/description';
+import { useDispatch } from 'react-redux';
+import { fetchAddProductToCart } from '../cart/cart.slice';
+import { MAIN_ROUTES } from '../app-navigation/routes';
 
 const entities = new XmlEntities();
 
-class ProductDetails extends Component {
-    getPriceString(item) {
-        return `$${item.price}`;
-    }
+const addToWishList = () => {};
 
-    getOldPriceString(item) {
-        return `$${item.oldPrice}`;
-    }
+const addToCart = ({ product, dispatch }) => {
+    dispatch(fetchAddProductToCart({ product }));
+};
 
-    getDiscountString(item) {
-        return `${item.discount}% Off`;
-    }
+const goBack = navigation => {
+    navigation.goBack();
+};
 
-    addToWishList() {}
+const getTitle = product => {
+    return product.cell.name;
+};
 
-    addToCart() {}
+const ProductDetails = ({ route, navigation }) => {
+    const dispatch = useDispatch();
 
-    goBack() {
-        this.props.navigation.goBack();
-    }
+    const product = route.params.product;
+    const goToCart = () => navigation.navigate(MAIN_ROUTES.MY_CART.name, { title: MAIN_ROUTES.MY_CART.title });
 
-    getTitle() {
-        return this.props.route.params.product.cell.name;
-    }
+    return (
+        <>
+            <Header
+                title={getTitle(product)}
+                goBack={() => {
+                    goBack(navigation);
+                }}
+                goToCart={goToCart}
+            />
 
-    render() {
-        return (
-            <>
-                <Header
-                    title={this.getTitle()}
-                    goBack={() => {
-                        this.goBack();
+            <ScrollView>
+                <Product item={product} isExtended={true} />
+                <Divider />
+                <Divider />
+                <ProductDescription
+                    description={htmlToText.fromString(entities.decode(product.cell.description))}
+                    wishList={() => {
+                        addToWishList();
+                    }}
+                    addToCart={() => {
+                        addToCart({ product, dispatch });
                     }}
                 />
-
-                <ScrollView>
-                    <Product item={this.props.route.params.product} isExtended={true} />
-                    <Divider />
-                    <Divider />
-                    <ProductDescription
-                        description={htmlToText.fromString(
-                            entities.decode(this.props.route.params.product.cell.description),
-                        )}
-                        wishList={() => {
-                            this.addToWishList();
-                        }}
-                        addToCart={() => {
-                            this.addToCart();
-                        }}
-                    />
-                </ScrollView>
-            </>
-        );
-    }
-}
+            </ScrollView>
+        </>
+    );
+};
 
 export default ProductDetails;
