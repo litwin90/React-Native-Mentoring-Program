@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { addProductToCart, getProductsInCart } from '../../app/services/cart';
+import { notification } from '../../app/services/notificationService';
 import Toast from 'react-native-toast-module';
 
 const initialState = {
@@ -63,6 +64,11 @@ export const fetchAddProductToCart = ({ product }) => (dispatch, getState) => {
             } else {
                 dispatch(CartActions.getSuccessAdding({ products, totals, weight }));
                 Toast.showToast('Product Added to cart');
+                const notificationMessage = [
+                    `Product: ${product.cell.name}`,
+                    `Cart has ${products.length} products`,
+                ].join('\n');
+                notification.localNotification('Product added to cart', notificationMessage);
             }
         })
         .catch(error => {
