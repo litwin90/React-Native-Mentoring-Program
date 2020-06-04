@@ -6,6 +6,8 @@ import styles from './styles';
 import { BaseStyles } from '../../../app.styles';
 import Product from '../../common/product/product';
 
+const COLUMNS_NUMBER = 2;
+
 const entities = new XmlEntities();
 
 const getCategoryHeader = ({ category, openCategoryProductList }) => (
@@ -22,12 +24,30 @@ const getCategoryHeader = ({ category, openCategoryProductList }) => (
         </TouchableHighlight>
     </View>
 );
+
+const formatListData = (products, numberOfColumns) => {
+    if (!products) {
+        return;
+    }
+    const numberOfRows = Math.floor(products.length / numberOfColumns);
+    const numberOfItemsInFullRow = numberOfColumns * numberOfRows;
+    const numberOfItemsInLastNotFullRow = products.length - numberOfItemsInFullRow;
+
+    if (!numberOfItemsInLastNotFullRow) {
+        return products;
+    }
+
+    const numberOfEmptyItemsToAdd = numberOfColumns - numberOfItemsInLastNotFullRow;
+
+    return [...products, ...Array.from({ length: numberOfEmptyItemsToAdd }).map(() => ({ isEmpty: true }))];
+};
+
 const CategoryPreview = ({ category, products, gotoProductDetails, openCategoryProductList }) => {
     return (
         <View style={styles.wrapper}>
             <FlatList
                 ListHeaderComponent={() => getCategoryHeader({ category, openCategoryProductList })}
-                data={products}
+                data={formatListData(products, COLUMNS_NUMBER)}
                 renderItem={({ item }) => {
                     return (
                         <Product
@@ -40,7 +60,9 @@ const CategoryPreview = ({ category, products, gotoProductDetails, openCategoryP
                     );
                 }}
                 keyExtractor={item => item.id}
-                numColumns={2}
+                numColumns={COLUMNS_NUMBER}
+                columnWrapperStyle={styles.column}
+                style={styles.flatList}
             />
         </View>
     );

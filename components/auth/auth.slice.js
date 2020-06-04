@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { signIn, signOut, restorePassword } from '../../app/services/auth';
+import { AppStorage } from '../../app/app-async-storage';
 
 const initialState = {
     isSignedIn: false,
@@ -25,6 +26,13 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
+        setUserData(store, action) {
+            store.isSignedIn = true;
+            store.userToken = action.payload.token;
+            store.signInForm.userName = action.payload.userName;
+            store.signInForm.email = action.payload.email;
+            store.signInForm.password = action.payload.password;
+        },
         signInRequest(state, action) {
             if (!state.isSignedIn) {
                 state.isLoading = true;
@@ -92,6 +100,7 @@ export const fetchSignIn = ({ email, userName, password }) => dispatch => {
         .then(({ status, token, error }) => {
             if (status === 1) {
                 dispatch(AuthActions.getSuccessSignIn({ token }));
+                AppStorage.setUserDataToAsyncStorage({ userName, email, password, token });
             } else {
                 dispatch(AuthActions.getFailedSignIn({ error }));
             }

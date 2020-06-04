@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import {BaseStyles} from '../../../app.styles';
+import { BaseStyles } from '../../../app.styles';
 
 const GroupHeaderStyles = StyleSheet.create({
     itemsHeader: {
@@ -29,6 +29,9 @@ const GroupHeaderStyles = StyleSheet.create({
     productsWrapper: {
         flexDirection: 'row',
         flexWrap: 'wrap',
+    },
+    column: {
+        justifyContent: 'space-between',
     },
 });
 

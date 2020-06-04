@@ -65,22 +65,20 @@ const Main = ({ navigation }) => {
                         </ScrollView>
                     </View>
                     <Divider />
-                    <View>
-                        <ScrollView style={styles.items}>
-                            {categories.map(category => {
-                                return (
-                                    <CategoryPreview
-                                        category={category}
-                                        products={productsByCategoryId[category.category_id]}
-                                        gotoProductDetails={product => {
-                                            gotoProductDetails({ navigation, product });
-                                        }}
-                                        key={category.category_id}
-                                        openCategoryProductList={cat => openCategoryProductList(navigation, cat)}
-                                    />
-                                );
-                            })}
-                        </ScrollView>
+                    <View style={styles.items}>
+                        {categories.map(category => {
+                            return (
+                                <CategoryPreview
+                                    category={category}
+                                    products={productsByCategoryId[category.category_id]}
+                                    gotoProductDetails={product => {
+                                        gotoProductDetails({ navigation, product });
+                                    }}
+                                    key={category.category_id}
+                                    openCategoryProductList={cat => openCategoryProductList(navigation, cat)}
+                                />
+                            );
+                        })}
                     </View>
                 </>
             )}
